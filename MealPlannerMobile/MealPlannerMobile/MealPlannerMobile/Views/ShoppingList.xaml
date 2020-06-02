@@ -6,10 +6,13 @@
              mc:Ignorable="d"
              x:Class="MealPlannerMobile.ShoppingList">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <Label Text="Ingredients:"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Center" 
+                   FontSize="42" FontFamily="Calibri"
+                   TextColor="Black" />
+            
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

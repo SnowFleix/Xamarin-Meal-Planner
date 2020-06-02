@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace MealPlannerMobile
 {
@@ -15,6 +16,12 @@ namespace MealPlannerMobile
         public ShoppingList()
         {
             InitializeComponent();
+
+            if (DeviceInfo.Platform == DevicePlatform.Android)
+                Padding = new Thickness(0, 15, 0, 0);
+            if (DeviceInfo.Platform == DevicePlatform.iOS)
+                Padding = new Thickness(0, 35, 0, 0);
+            
         }
     }
 }

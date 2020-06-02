@@ -43,7 +43,6 @@ namespace MealPlannerMobile
         public int usedIngredientCount { get; set; }
         public int missedIngredientCount { get; set; }
         public MissedIngredients[] missedIngredients { get; set; } 
-        //public string instructions { get; set; }
         public int likes { get; set; }
         public object[] usedIngredients { get; set; } 
         public object[] unusedIngredients { get; set; }
