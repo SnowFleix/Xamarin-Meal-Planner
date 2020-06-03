@@ -10,7 +10,7 @@ namespace MealPlannerMobile
         {
             InitializeComponent();
 
-            MainPage = new ShoppingList();
+            MainPage = new RecipeSettings();
 
             //MainPage = new MainPage();
         }

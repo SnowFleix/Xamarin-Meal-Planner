@@ -4,16 +4,49 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MealPlannerMobile.RecipeSettings"
-             BackgroundColor="#F5FFFA">
+             x:Class="MealPlannerMobile.RecipeSettings">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
+            <!--<Grid.ColumnDefinitions>
                 
-            </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>-->
+            <!--Diet row-->
+            <Label Grid.Row="0" Grid.Column="0" 
+                   Text="Diet:"/>
+            <Picker Grid.Row="0" Grid.Column="1" ItemsSource="" />
+            <!--Intolerances list and buttons-->
+            <Label Grid.Row="1" Grid.ColumnSpan="2" 
+                   Text="Intolerances:"/>
+            <ListView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="" />
+            <Picker Grid.Row="3" Grid.Column="0" ItemsSource="" />
+            <Button Grid.Row="3" Grid.Column="1" Text="Add" Command="" />
+            <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Remove" Command="" />
+            <!--Max calories row-->
+            <Label Grid.Row="5" Grid.Column="0" 
+                   Text="Max Calories:" />
+            <Entry Grid.Row="5" Grid.Column="1" Text="0000" />
+            <!--Exclue ingredients area-->
+            <Label Grid.Row="6" Grid.Column="0" 
+                   Text="Exclude Ingredients" />
+            <ListView Grid.Row="7" Grid.ColumnSpan="2" ItemsSource="" />
+            <Entry Grid.Row="8" Grid.Column="0" Text="\'Eggs\'" />
+            <Button Grid.Row="8" Grid.Column="1" Text="Add" Command="" />
+            <Button Grid.Row="9" Grid.ColumnSpan="2" Text="Remove" Command="" />
+            <!--Save button-->
+            <Button Grid.Row="10" Grid.ColumnSpan="2" Text="Save" Command="" Padding="0,50,0,0" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
