@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using Rg.Plugins.Popup;
+using Rg.Plugins.Popup.Services;
 
 namespace MealPlannerMobile
 {
@@ -88,10 +89,11 @@ namespace MealPlannerMobile
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void lstView_intolerances_OnItemTapped(object sender, ItemTappedEventArgs e)
+        [Obsolete]
+        async void lstView_intolerances_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e == null) return; // has been set to null, do not 'process' tapped event
-            
+            await PopupNavigation.PushAsync(new RemoveItemFromListPopup((string)e.Item));
         }
 
         /// <summary>
@@ -99,10 +101,11 @@ namespace MealPlannerMobile
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void lstView_excldIngredients_OnItemTapped(object sender, ItemTappedEventArgs e)
+        [Obsolete]
+        async void lstView_excldIngredients_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e == null) return; // has been set to null, do not 'process' tapped event
-
+            await PopupNavigation.PushAsync(new RemoveItemFromListPopup((string)e.Item));
         }
     }
 }
