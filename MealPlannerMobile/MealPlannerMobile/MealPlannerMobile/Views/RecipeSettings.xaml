@@ -9,8 +9,8 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="150" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -20,20 +20,38 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            
             <!--<Grid.ColumnDefinitions>
-                
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>-->
+            
             <!--Diet row-->
             <Label Grid.Row="0" Grid.Column="0" 
+                   FontSize="40"
+                   TextColor="Black"
+                   FontFamily="Heebo"
                    Text="Diet:"/>
-            <Picker Grid.Row="0" Grid.Column="1" ItemsSource="" />
+            <Picker Grid.Row="0" Grid.Column="1"
+                    x:Name="picker_diets"
+                    Title="Select a diet"
+                    TitleColor="Black" />
             <!--Intolerances list and buttons-->
             <Label Grid.Row="1" Grid.ColumnSpan="2" 
                    Text="Intolerances:"/>
-            <ListView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="" />
-            <Picker Grid.Row="3" Grid.Column="0" ItemsSource="" />
-            <Button Grid.Row="3" Grid.Column="1" Text="Add" Command="" />
-            <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Remove" Command="" />
+            <ListView Grid.Row="2" Grid.ColumnSpan="2" x:Name="lstView_intolerances" ItemTapped="OnItemTapped" />
+            <Picker Grid.Row="3" Grid.Column="0" x:Name="picker_intolerances" />
+            <Button Grid.Row="3" Grid.Column="1" Text="Add" Clicked="btnAddIntolerance_click" />
+            <Button Grid.Row="4" Grid.ColumnSpan="2" Text="Remove" Clicked="btnRemoveIntolerance_click" />
             <!--Max calories row-->
             <Label Grid.Row="5" Grid.Column="0" 
                    Text="Max Calories:" />
@@ -41,12 +59,12 @@
             <!--Exclue ingredients area-->
             <Label Grid.Row="6" Grid.Column="0" 
                    Text="Exclude Ingredients" />
-            <ListView Grid.Row="7" Grid.ColumnSpan="2" ItemsSource="" />
-            <Entry Grid.Row="8" Grid.Column="0" Text="\'Eggs\'" />
-            <Button Grid.Row="8" Grid.Column="1" Text="Add" Command="" />
-            <Button Grid.Row="9" Grid.ColumnSpan="2" Text="Remove" Command="" />
+            <ListView Grid.Row="7" Grid.ColumnSpan="2" x:Name="lstView_excldIngredients"/>
+            <Entry Grid.Row="8" Grid.Column="0" x:Name="entry_exldIngredients" Text="'Eggs'" />
+            <Button Grid.Row="8" Grid.Column="1" Text="Add" Clicked="btnAddExcludedIngredient_click" />
+            <Button Grid.Row="9" Grid.ColumnSpan="2" Text="Remove" Clicked="btnRemoveExcludedIngredient_click" />
             <!--Save button-->
-            <Button Grid.Row="10" Grid.ColumnSpan="2" Text="Save" Command="" Padding="0,50,0,0" />
+            <Button Grid.Row="10" Grid.ColumnSpan="2" Text="Save" Clicked="btnSubmit_click" Padding="0,50,0,0" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
