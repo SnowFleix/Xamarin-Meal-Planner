@@ -9,7 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlannerMobile.Android",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlannerMobile.iOS", "MealPlannerMobile\MealPlannerMobile.iOS\MealPlannerMobile.iOS.csproj", "{51F00A78-E0E3-4B21-BE66-70E3872BFEA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealPlannerMobile", "MealPlannerMobile\MealPlannerMobile\MealPlannerMobile.csproj", "{F97B44F4-847F-487B-9AA7-3B52B592EB45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MealPlannerMobile", "MealPlannerMobile\MealPlannerMobile\MealPlannerMobile.csproj", "{F97B44F4-847F-487B-9AA7-3B52B592EB45}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{746BFFC9-6EFF-434C-BCD0-25459F71582A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
