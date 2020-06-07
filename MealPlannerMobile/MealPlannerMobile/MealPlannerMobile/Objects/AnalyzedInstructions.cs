@@ -9,7 +9,7 @@ namespace MealPlannerMobile
     /// <summary>
     /// 
     /// </summary>
-    class AnalyzedInstructions
+    public class AnalyzedInstructions
     {
         public string name { get; set; }
         public InstructionSteps[] steps { get; set; }

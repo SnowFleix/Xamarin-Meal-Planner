@@ -7,12 +7,14 @@
              x:Class="MealPlannerMobile.ShoppingList">
     <ContentPage.Content>
         <ScrollView>
-            <Label Text="Ingredients:"
-                   VerticalOptions="Start"
-                   HorizontalOptions="Center" 
-                   FontSize="42" FontFamily="Calibri"
-                   TextColor="Black" />
-            
+            <StackLayout>
+                <Label Text="Ingredients:"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Center" 
+                       FontSize="42" FontFamily="Calibri"
+                       TextColor="Black" />
+                <ListView x:Name="lstView_shoppingItems" ItemTapped=""/>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -30,7 +30,6 @@ namespace MealPlannerMobile
             this.RefCollection = collection;
         }
 
-        [Obsolete]
         public async void Button_Yes_Clicked(object source, EventArgs e)
         {
             RefCollection.Remove(SelectedItem);
@@ -38,7 +37,6 @@ namespace MealPlannerMobile
             await PopupNavigation.PopAsync();
         }
 
-        [Obsolete]
         public async void Button_No_Clicked(object source, EventArgs e)
         {
             await PopupNavigation.PopAsync();

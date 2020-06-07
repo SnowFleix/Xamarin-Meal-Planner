@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using RestSharp;
 using Newtonsoft.Json;
+using MealPlannerMobile.Objects;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace MealPlannerMobile
 {
-    class spoontacularAPI
+    public class spoontacularAPI
     {
         private readonly string host = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
         private readonly string key = "62431552c5msh0329ee0958a0b99p1180a6jsndbc779cdf5fa";
@@ -79,7 +82,7 @@ namespace MealPlannerMobile
         ///                     the query by default is set to empty by default because it is not needed unless a specific meal is needed
         /// <param name="number">The numbers of recipes to get back from spoonacular</param>
         /// <returns>Returns the complete array of results including metadata</returns>
-        public Result GetRandomRecipe(string cuisine, string diet, string intolerences, string mealType, string query = "", int number = 1)
+        public Result GetRandomRecipe(string cuisine, string diet, string intolerences, string mealType, int number = 1, string query = "")
         {
             var path = String.Format("/recipes/complexSearch?query={0}&cuisine={1}&diet={2}&intolerances={3}&type={4}&instructionsRequired=true&fillIngredients=true&addRecipeInformation=true&number={5}",
                                      query,
@@ -100,6 +103,34 @@ namespace MealPlannerMobile
                 throw new Exception((int)response.StatusCode + "Error calling GetRandomRecipes: " + response.ErrorMessage + response.ErrorMessage);
 
             return JsonConvert.DeserializeObject<Result>(response.Content);
+        }
+
+        /// <summary>
+        /// Uses the spoonacularAPI to convert the ingredient amounts
+        /// </summary>
+        /// <param name="ingredientName">Name of the ingredient to convert</param>
+        /// <param name="amount">Amount to convert</param>
+        /// <param name="originalUnit">The unit used in the ingredient to be converted</param>
+        /// <param name="targetUnit">The unit which you want to convert to</param>
+        /// <returns></returns>
+        public double ConvertAmount(string ingredientName, double amount, string originalUnit, string targetUnit)
+        {
+            var path = String.Format("/recipes/convert?ingredientName={0}&sourceAmount={1}&sourceUnit={2}&targetUnit={3}",
+                                     ingredientName,
+                                     amount,
+                                     originalUnit,
+                                     targetUnit);
+            path = path.Replace("{format}", "json");
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse)SendRequest(path, Method.GET, new Dictionary<String, String>()); // just create an empty query param dictionary because we already built the query params
+
+            if (((int)response.StatusCode) >= 400)
+                throw new Exception((int)response.StatusCode + "Error calling GetRandomRecipes: " + response.Content + response.Content);
+            else if (((int)response.StatusCode) == 0)
+                throw new Exception((int)response.StatusCode + "Error calling GetRandomRecipes: " + response.ErrorMessage + response.ErrorMessage);
+
+            return JsonConvert.DeserializeObject<ConversionResponse>(response.Content).targetAmount;
         }
     }
 }

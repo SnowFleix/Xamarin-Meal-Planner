@@ -7,13 +7,29 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using Rg.Plugins.Popup.Services;
 
 namespace MealPlannerMobile
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// TODO: Refactor the code and make it more readable as well as any abstractions
+    ///       Create popups for changing the amounts as well as deleting some ingredients
+    /// </remarks>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShoppingList : ContentPage
     {
-        public ShoppingList()
+        private readonly Recipe[] recipes;
+        private List<Ingredient> AllIngredients = new List<Ingredient>();
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="recipes"></param>
+        /// <remarks>should eventually work with the persistent data stored after doing a get plan request, rather than being sent an array</remarks>
+        public ShoppingList(Recipe[] recipes)
         {
             InitializeComponent();
 
@@ -21,7 +37,153 @@ namespace MealPlannerMobile
                 Padding = new Thickness(0, 15, 0, 0);
             if (DeviceInfo.Platform == DevicePlatform.iOS)
                 Padding = new Thickness(0, 35, 0, 0);
-            
+
+            this.recipes = recipes;
+            AddIngredientsToList();
+            AccumulateIngredients();
+            lstView_shoppingItems.ItemsSource = ConvertIngredientsToString().ToArray();
+        }
+
+        /// <summary>
+        /// Adds all the ingredients from all the recipes to one large list
+        /// </summary>
+        public void AddIngredientsToList()
+        {
+            foreach (Recipe r in recipes)
+                AllIngredients.AddRange(r.extendedIngredients);
+        }
+
+        /// <summary>
+        /// Sorts through all the ingredients in the recipes and accumulates their amounts
+        /// </summary>
+        private void AccumulateIngredients()
+        {
+            List<Ingredient> tempIngredients = new List<Ingredient>();
+            foreach (Ingredient i in AllIngredients)
+            {
+                if (!CheckIfIngredientIsAlreadyInList(i, tempIngredients))
+                    tempIngredients.Add(i);
+                else if (CheckIfIngredientIsAlreadyInList(i, tempIngredients))                                                                      // the ingredient needs to exist to add the amounts together
+                {
+                    //Ingredient temp = GetIngredient(i, tempIngredients);
+                    if (i.unit == GetIngredient(i, tempIngredients).unit)
+                        GetIngredient(i, tempIngredients).amount += i.amount;                                                                       // if the units are already the same, don't bother calling the api
+                    else {
+                        if (!String.IsNullOrWhiteSpace(i.unit) && !String.IsNullOrWhiteSpace(GetIngredient(i, tempIngredients).unit))
+                            GetIngredient(i, tempIngredients).amount += ConvertUnit(i.unit, GetIngredient(i, tempIngredients));                     // call the api to convert the units
+                        else
+                            tempIngredients.Add(i);
+                    }
+                }
+            }
+            AllIngredients = tempIngredients; // 
+        }
+
+        /// <summary>
+        /// Uses the sponaculat api to convert the amount from one unit to another
+        /// </summary>
+        /// <param name="unit">The target unit, the unit to be converted to</param>
+        /// <param name="ingredient">The ingredient that needs to be converted</param>
+        /// <returns></returns>
+        private double ConvertUnit(string unit, Ingredient ingredient)
+        {
+            return new spoontacularAPI().ConvertAmount(ingredient.name, ingredient.amount, ingredient.unit, unit);
+        }
+
+        /// <summary>
+        /// Get an ingredient with the same name from a passed list
+        /// </summary>
+        /// <param name="ingredient">The ingredient to match with</param>
+        /// <param name="ingredients">The list of ingredients to search through</param>
+        /// <returns></returns>
+        private Ingredient GetIngredient(Ingredient ingredient, List<Ingredient> ingredients)
+        {
+            foreach (Ingredient i in ingredients)
+                if (i.name == ingredient.name || i.name == ingredient.name.Remove(ingredient.name.Length - 1))
+                    return i;
+            return new Ingredient(); // need to return something here
+        }
+
+        /// <summary>
+        /// Check if the ingredient exists in a passed list
+        /// </summary>
+        /// <param name="ingredient">The ingredient to check</param>
+        /// <param name="ingredients">The list to search through</param>
+        /// <returns></returns>
+        private bool CheckIfIngredientIsAlreadyInList(Ingredient ingredient, List<Ingredient> ingredients)
+        {
+            foreach (Ingredient i in ingredients)
+                if (i.name == ingredient.name || i.name == ingredient.name.Remove(ingredient.name.Length - 1)) // The idea of || ingredientName - 1 is to stop adding plural versions of the ingredients
+                    return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Convert the list of sorted ingredients to a list of strings that can be used as an item source
+        /// </summary>
+        /// <returns></returns>
+        private List<string> ConvertIngredientsToString()
+        {
+            List<string> retLst = new List<string>();
+            foreach (Ingredient i in AllIngredients) {
+                Ingredient temp = NormaliseAmount(i);
+                retLst.Add(temp.name + " " + temp.amount + " " + temp.unit);
+            }
+            retLst.Sort();
+            return retLst;
+        }
+
+        /// <summary>
+        /// Sorts the amount into a more readable amounts so there are no '320 garlic cloves'
+        /// </summary>
+        /// <param name="ingredient">The ingredient to normalise the amount</param>
+        /// <returns></returns>
+        private Ingredient NormaliseAmount(Ingredient ingredient)
+        {
+            if (ingredient.amount < 20) return ingredient;
+
+            else if (ingredient.unit == "oz")
+            {
+                ingredient.amount = ConvertUnit("g", ingredient);
+                ingredient.unit = "g";
+            }
+
+            else if (ingredient.unit == "clove" && ingredient.amount > 12) 
+            { 
+                ingredient.amount /= 11;
+                ingredient.unit = "";
+            }
+
+            if (ingredient.amount > 1000 && ingredient.unit == "g")
+            {
+                ingredient.amount /= 1000;
+                ingredient.unit = "kg";
+            }
+
+            return ingredient;
+        }
+
+        /// <summary>
+        /// Handles one of the list view items being tapped
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="args"></param>
+        [Obsolete]
+        public async Task LstView_ShoppingItems_TappedAsync(object source, ItemTappedEventArgs e)
+        {
+            if (e == null) return; // has been set to null, do not 'process' tapped event
+
+            Ingredient i = new Ingredient();
+            foreach(Ingredient ingre in AllIngredients) {
+                if (((string)e.Item).Contains(ingre.name))
+                    i = ingre;
+            }
+
+            await PopupNavigation.PushAsync(new AlterIngredientInShoppingList(i));
+            MessagingCenter.Subscribe<AlterIngredientInShoppingList>(this, "RemovedItemFromList", (objSender) => {
+                
+            });
+            MessagingCenter.Unsubscribe<RemoveItemFromListPopup>(this, "RemoveItemFromList");
         }
     }
 }

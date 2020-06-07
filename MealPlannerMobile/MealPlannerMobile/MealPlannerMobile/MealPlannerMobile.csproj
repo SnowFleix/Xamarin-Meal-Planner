@@ -20,6 +20,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\TestData\TestingData.JSON" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\TestData\TestingData.JSON" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="RestSharp" Version="106.11.4" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.3" />

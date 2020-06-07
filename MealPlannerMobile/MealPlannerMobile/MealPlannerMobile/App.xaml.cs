@@ -10,8 +10,9 @@ namespace MealPlannerMobile
         {
             InitializeComponent();
 
-            MainPage = new RecipeSettings();
-
+            Result apiResult = new spoontacularAPI().GetRandomRecipe("", "", "", "main course", 28);
+            MainPage = new ShoppingList(apiResult.results);
+            //MainPage = new RecipeSettings();
             //MainPage = new MainPage();
         }
 

@@ -28,7 +28,7 @@ namespace MealPlannerMobile
     /// <summary>
     /// Base ingredients
     /// </summary>
-    class Ingredient
+    public class Ingredient
     {
         public int? id { get; set; } // There was just a random item that had a null ID
         public string aisle { get; set; } 
@@ -49,7 +49,7 @@ namespace MealPlannerMobile
     /// For some reason the missed ingredients are different to the normal ingredients
     /// perhaps abstract this to iherit?
     /// </summary>
-    class MissedIngredients
+    public class MissedIngredients
     {
         public int? id { get; set; }
         public double amount { get; set; }

@@ -38,7 +38,7 @@ namespace MealPlannerMobile
     /// <summary>
     /// 
     /// </summary>
-    class InstructionSteps
+    public class InstructionSteps
     {
         public int number { get; set; }
         public string step { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MealPlannerMobile
 {
-    class Recipe
+    public class Recipe
     {
         public bool vegetarian { get; set; }
         public bool vegan { get; set; }

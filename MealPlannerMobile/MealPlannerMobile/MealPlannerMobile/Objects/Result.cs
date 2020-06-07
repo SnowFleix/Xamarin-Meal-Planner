@@ -13,7 +13,7 @@ namespace MealPlannerMobile
     /// <summary>
     /// 
     /// </summary>
-    class Result
+    public class Result
     {
         public Recipe[] results { get; set; }    // Items represents the recipes found
         public int offset { get; set; }         //
