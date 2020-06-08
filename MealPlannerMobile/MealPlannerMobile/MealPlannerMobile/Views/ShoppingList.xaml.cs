@@ -169,21 +169,25 @@ namespace MealPlannerMobile
         /// <param name="source"></param>
         /// <param name="args"></param>
         [Obsolete]
-        public async Task LstView_ShoppingItems_TappedAsync(object source, ItemTappedEventArgs e)
+        public async void LstView_ShoppingItems_Tapped(object source, ItemTappedEventArgs e)
         {
-            if (e == null) return; // has been set to null, do not 'process' tapped event
+            if (e == null) return; // if e has been set to null, do not 'process' tapped event
 
-            Ingredient i = new Ingredient();
-            foreach(Ingredient ingre in AllIngredients) {
-                if (((string)e.Item).Contains(ingre.name))
-                    i = ingre;
+            int i = 0;
+            for (i=0; i < AllIngredients.Count; i++) {
+                if (((string)e.Item).Contains(AllIngredients[i].name))
+                    break;
             }
 
-            await PopupNavigation.PushAsync(new AlterIngredientInShoppingList(i));
-            MessagingCenter.Subscribe<AlterIngredientInShoppingList>(this, "RemovedItemFromList", (objSender) => {
-                
+            await PopupNavigation.PushAsync(new AlterIngredientInShoppingList(AllIngredients[i]));
+            MessagingCenter.Subscribe<AlterIngredientInShoppingList, Ingredient>(this, "UpdateIngredient", (objSender, args) => {
+                if (args == null)
+                    AllIngredients.RemoveAt(i);
+                else
+                    AllIngredients[i] = args;
+                lstView_shoppingItems.ItemsSource = ConvertIngredientsToString().ToArray();
             });
-            MessagingCenter.Unsubscribe<RemoveItemFromListPopup>(this, "RemoveItemFromList");
+            MessagingCenter.Unsubscribe<RemoveItemFromListPopup>(this, "UpdateIngredient");
         }
     }
 }

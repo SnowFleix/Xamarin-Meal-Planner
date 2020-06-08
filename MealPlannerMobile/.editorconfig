@@ -1,7 +1,7 @@
 ﻿[*.{cs,vb}]
 
 # IDE0040: Add accessibility modifiers
-dotnet_style_require_accessibility_modifiers = for_non_interface_members:warning
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:suggestion
 
 # CS0612: Type or member is obsolete
 dotnet_diagnostic.CS0612.severity = suggestion

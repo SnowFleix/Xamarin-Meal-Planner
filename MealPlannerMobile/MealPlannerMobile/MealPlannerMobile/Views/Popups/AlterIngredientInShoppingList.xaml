@@ -22,9 +22,14 @@
             <StackLayout Padding="10">
                 <Label x:Name="TitleLabel" TextColor="Black" FontSize="20" HorizontalOptions="Center"></Label>
                 <ScrollView>
-                    <StackLayout Orientation="Horizontal">
-                        <Button Text="Yes" TextColor="Black" Clicked="Button_Yes_Clicked" />
-                        <Button Text="No" TextColor="Black" Clicked="Button_No_Clicked" />
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Update Amount: " FontSize="20"/>
+                            <Entry x:Name="EntryAmount"/>
+                            <Label x:Name="UnitLabel" FontSize="20"/>
+                        </StackLayout>
+                        <Button Text="Update" TextColor="Black" Clicked="BtnUpdate_Clicked" />
+                        <Button Text="Delete" TextColor="Black" Clicked="BtnDelete_Clicked" />
                     </StackLayout>
                 </ScrollView>
             </StackLayout>

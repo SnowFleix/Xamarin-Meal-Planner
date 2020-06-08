@@ -13,7 +13,7 @@
                        HorizontalOptions="Center" 
                        FontSize="42" FontFamily="Calibri"
                        TextColor="Black" />
-                <ListView x:Name="lstView_shoppingItems" ItemTapped=""/>
+                <ListView x:Name="lstView_shoppingItems" ItemTapped="LstView_ShoppingItems_Tapped"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

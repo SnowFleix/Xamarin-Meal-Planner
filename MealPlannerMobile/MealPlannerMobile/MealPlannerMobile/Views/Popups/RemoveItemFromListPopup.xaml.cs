@@ -26,6 +26,7 @@ namespace MealPlannerMobile
             InitializeComponent();
 
             TitleLabel.Text = String.Format("Would you like to remove {0} from the list?", item);
+            
             this.SelectedItem = item;
             this.RefCollection = collection;
         }

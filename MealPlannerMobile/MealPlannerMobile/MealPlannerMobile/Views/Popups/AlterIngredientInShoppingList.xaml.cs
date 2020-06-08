@@ -11,15 +11,22 @@ using Rg.Plugins.Popup;
 using Rg.Plugins.Popup.Services;
 using Rg.Plugins.Popup.Pages;
 
+using static MealPlannerMobile.UtilFunction;
+
 namespace MealPlannerMobile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AlterIngredientInShoppingList : PopupPage
     {
+        private Ingredient ingredient;
         public AlterIngredientInShoppingList(Ingredient ingredient)
         {
             if (ingredient == null) ClosePopup(); // if the ingredient is somehow null, just close the popup straight away
+            this.ingredient = ingredient;
             InitializeComponent();
+            TitleLabel.Text = String.Format("Alter {0}?", ingredient.name);
+            UnitLabel.Text = ingredient.unit;
+            EntryAmount.Text = ingredient.amount.ToString();
         }
 
         /// <summary>
@@ -28,6 +35,39 @@ namespace MealPlannerMobile
         public async void ClosePopup()
         {
             await PopupNavigation.PopAsync();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ReturnIngredient()
+        {
+            MessagingCenter.Send<AlterIngredientInShoppingList, Ingredient>(this, "UpdateIngredient", ingredient); // 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        public void BtnUpdate_Clicked(object source, EventArgs e)
+        {
+            if(IsObjNumber(EntryAmount.Text))
+                ingredient.amount = Convert.ToInt32(EntryAmount.Text);
+            ReturnIngredient();
+            ClosePopup();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        public void BtnDelete_Clicked(object source, EventArgs e)
+        {
+            ingredient = null;
+            ReturnIngredient();
+            ClosePopup();
         }
     }
 }

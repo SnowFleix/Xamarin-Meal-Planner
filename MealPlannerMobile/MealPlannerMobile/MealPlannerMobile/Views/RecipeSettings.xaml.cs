@@ -16,8 +16,8 @@ namespace MealPlannerMobile
     public partial class RecipeSettings : ContentPage
     {
         // Perhaps move this into something like an .env file?
-        readonly string[] APIdiets = { "Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo", "Primal", "Whole30" }; 
-        readonly string[] intolerances = { "Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", "Soy", "Sulfite", "Tree Nut", "Wheat" };
+        private readonly string[] APIdiets = { "Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo", "Primal", "Whole30" }; 
+        private readonly string[] intolerances = { "Dairy", "Egg", "Gluten", "Grain", "Peanut", "Seafood", "Sesame", "Shellfish", "Soy", "Sulfite", "Tree Nut", "Wheat" };
         List<string> selected_intolerances = new List<string>();
         List<string> selected_exldIngredients = new List<string>();
 

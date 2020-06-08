@@ -4,14 +4,14 @@ using System.Text;
 
 namespace MealPlannerMobile
 {
-    static class UtilFunction
+    public static class UtilFunction
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        private static string ParameterToString(object obj)
+        public static string ParameterToString(object obj)
         {
             if (obj is DateTime)
                 return ((DateTime)obj).ToString();
@@ -19,6 +19,24 @@ namespace MealPlannerMobile
                 return String.Join(",", (obj as List<string>).ToArray());
             else
                 return Convert.ToString(obj);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsObjNumber(object obj)
+        {
+            try
+            {
+                Convert.ToInt32(obj);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
     }
 }
