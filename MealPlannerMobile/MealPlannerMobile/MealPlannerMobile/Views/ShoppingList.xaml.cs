@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+
 using Rg.Plugins.Popup.Services;
+
+using static MealPlannerMobile.UtilFunction;
 
 namespace MealPlannerMobile
 {
-    /// <summary>
-    /// 
-    /// </summary>
     /// <remarks>
     /// TODO: Refactor the code and make it more readable as well as any abstractions
     ///       Create popups for changing the amounts as well as deleting some ingredients
@@ -65,18 +65,18 @@ namespace MealPlannerMobile
                     tempIngredients.Add(i);
                 else if (CheckIfIngredientIsAlreadyInList(i, tempIngredients))                                                                      // the ingredient needs to exist to add the amounts together
                 {
-                    //Ingredient temp = GetIngredient(i, tempIngredients);
                     if (i.unit == GetIngredient(i, tempIngredients).unit)
-                        GetIngredient(i, tempIngredients).amount += i.amount;                                                                       // if the units are already the same, don't bother calling the api
-                    else {
+                            GetIngredient(i, tempIngredients).amount += i.amount;                                                                   // if the units are already the same, don't bother calling the api
+                    else
+                    {
                         if (!String.IsNullOrWhiteSpace(i.unit) && !String.IsNullOrWhiteSpace(GetIngredient(i, tempIngredients).unit))
-                            GetIngredient(i, tempIngredients).amount += ConvertUnit(i.unit, GetIngredient(i, tempIngredients));                     // call the api to convert the units
+                                GetIngredient(i, tempIngredients).amount += ConvertUnit(GetIngredient(i, tempIngredients).unit, i);                 // call the api to convert the units
                         else
                             tempIngredients.Add(i);
                     }
                 }
             }
-            AllIngredients = tempIngredients; // 
+            AllIngredients = tempIngredients;
         }
 
         /// <summary>
@@ -125,9 +125,10 @@ namespace MealPlannerMobile
         private List<string> ConvertIngredientsToString()
         {
             List<string> retLst = new List<string>();
-            foreach (Ingredient i in AllIngredients) {
+            foreach (Ingredient i in AllIngredients)
+            {
                 Ingredient temp = NormaliseAmount(i);
-                retLst.Add(temp.name + " " + temp.amount + " " + temp.unit);
+                retLst.Add(temp.name + " " + Math.Round(temp.amount, 2) + " " + temp.unit);
             }
             retLst.Sort();
             return retLst;
@@ -148,16 +149,31 @@ namespace MealPlannerMobile
                 ingredient.unit = "g";
             }
 
-            else if (ingredient.unit == "clove" && ingredient.amount > 12) 
-            { 
+            else if (ingredient.unit == "tablespoon" || ingredient.unit == "tablespoons" || ingredient.unit == "tbsp" || ingredient.unit == "Tbsp")
+            {
+                if (ingredient.amount < 10) return ingredient;
+                ingredient.amount = ConvertUnit("ml", ingredient);
+                ingredient.unit = "ml";
+            }
+
+            else if (ingredient.unit == "clove" && ingredient.amount > 12)
+            {
                 ingredient.amount /= 11;
                 ingredient.unit = "";
             }
 
-            if (ingredient.amount > 1000 && ingredient.unit == "g")
+            if (ingredient.amount > 1000)
             {
-                ingredient.amount /= 1000;
-                ingredient.unit = "kg";
+                if (ingredient.unit == "g")
+                {
+                    ingredient.amount /= 1000;
+                    ingredient.unit = "kg";
+                }
+                else if (ingredient.unit == "ml")
+                {
+                    ingredient.amount /= 1000;
+                    ingredient.unit = "l";
+                }
             }
 
             return ingredient;
@@ -173,18 +189,33 @@ namespace MealPlannerMobile
         {
             if (e == null) return; // if e has been set to null, do not 'process' tapped event
 
-            int i = 0;
-            for (i=0; i < AllIngredients.Count; i++) {
-                if (((string)e.Item).Contains(AllIngredients[i].name))
-                    break;
-            }
+            string ingredientName = e.Item.ToString();
+            string[] parsedName = ParseString(ingredientName, ' '); ingredientName = "";
+            string unit = parsedName.Last<string>();
+            if (IsObjNumber(unit))
+                unit = "";
 
-            await PopupNavigation.PushAsync(new AlterIngredientInShoppingList(AllIngredients[i]));
-            MessagingCenter.Subscribe<AlterIngredientInShoppingList, Ingredient>(this, "UpdateIngredient", (objSender, args) => {
-                if (args == null)
-                    AllIngredients.RemoveAt(i);
-                else
-                    AllIngredients[i] = args;
+            for (int index = 0; index < parsedName.Length; index++)
+            {
+                if (!IsObjNumber(parsedName[index]))
+                    ingredientName += parsedName[index] + " ";
+                else break;
+            }
+            ingredientName = ingredientName.Trim();
+
+            int i; // i for index
+            for (i = 0; i < AllIngredients.Count; i++)
+                if (ingredientName == AllIngredients[i].name /*&& unit == AllIngredients[i].unit*/)
+                    break;
+
+            await PopupNavigation.PushAsync(new AlterIngredientInShoppingList(AllIngredients[i], i));
+            MessagingCenter.Subscribe<AlterIngredientInShoppingList, Ingredient>(this, "UpdateIngredient", (objSender, args) =>
+            {
+                // 
+                if (args.amount == 0 && AllIngredients[objSender.ingredientIndex].name == args.name)
+                    AllIngredients.RemoveAt(objSender.ingredientIndex);
+                else if (AllIngredients[objSender.ingredientIndex].name == args.name)
+                    AllIngredients[objSender.ingredientIndex] = args;
                 lstView_shoppingItems.ItemsSource = ConvertIngredientsToString().ToArray();
             });
             MessagingCenter.Unsubscribe<RemoveItemFromListPopup>(this, "UpdateIngredient");

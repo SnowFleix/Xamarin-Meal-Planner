@@ -30,13 +30,24 @@ namespace MealPlannerMobile
         {
             try
             {
-                Convert.ToInt32(obj);
+                Convert.ToDouble(obj);
                 return true;
             }
             catch(Exception e)
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="originalStr"></param>
+        /// <param name="splitChar"></param>
+        /// <returns></returns>
+        public static string[] ParseString(string originalStr, char splitChar)
+        {
+            return originalStr.Split(splitChar);
         }
     }
 }

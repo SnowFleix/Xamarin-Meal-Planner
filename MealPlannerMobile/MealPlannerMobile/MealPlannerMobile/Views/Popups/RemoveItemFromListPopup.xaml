@@ -18,7 +18,7 @@
                       HasBackgroundAnimation="False"/>
     </pages:PopupPage.Animation>
     <StackLayout VerticalOptions="Center"  Padding="20,0" HorizontalOptions="FillAndExpand" >
-        <Frame CornerRadius="10" Padding="0" BackgroundColor="CadetBlue" >
+        <Frame CornerRadius="10" Padding="0" BackgroundColor="#00688B" >
             <StackLayout Padding="10">
                 <Label x:Name="TitleLabel" TextColor="Black" FontSize="20" HorizontalOptions="Center"></Label>
                 <ScrollView>

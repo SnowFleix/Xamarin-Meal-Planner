@@ -18,15 +18,15 @@
                       HasBackgroundAnimation="False"/>
     </pages:PopupPage.Animation>
     <StackLayout VerticalOptions="Center"  Padding="20,0" HorizontalOptions="FillAndExpand" >
-        <Frame CornerRadius="10" Padding="0" BackgroundColor="CadetBlue" >
+        <Frame CornerRadius="10" Padding="0" BackgroundColor="#00688B" >
             <StackLayout Padding="10">
                 <Label x:Name="TitleLabel" TextColor="Black" FontSize="20" HorizontalOptions="Center"></Label>
                 <ScrollView>
                     <StackLayout Orientation="Vertical">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Update Amount: " FontSize="20"/>
-                            <Entry x:Name="EntryAmount"/>
-                            <Label x:Name="UnitLabel" FontSize="20"/>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <Label Text="Update Amount: " FontSize="20" TextColor="Black" VerticalOptions="Center"/>
+                            <Entry x:Name="EntryAmount" FontSize="20" VerticalOptions="Center"/>
+                            <Label x:Name="UnitLabel" FontSize="20" TextColor="Black" VerticalOptions="Center"/>
                         </StackLayout>
                         <Button Text="Update" TextColor="Black" Clicked="BtnUpdate_Clicked" />
                         <Button Text="Delete" TextColor="Black" Clicked="BtnDelete_Clicked" />

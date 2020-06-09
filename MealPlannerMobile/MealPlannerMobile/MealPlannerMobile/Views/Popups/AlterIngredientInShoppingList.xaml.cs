@@ -19,10 +19,12 @@ namespace MealPlannerMobile
     public partial class AlterIngredientInShoppingList : PopupPage
     {
         private Ingredient ingredient;
-        public AlterIngredientInShoppingList(Ingredient ingredient)
+        public readonly int ingredientIndex;
+        public AlterIngredientInShoppingList(Ingredient ingredient, int index)
         {
             if (ingredient == null) ClosePopup(); // if the ingredient is somehow null, just close the popup straight away
             this.ingredient = ingredient;
+            this.ingredientIndex = index;
             InitializeComponent();
             TitleLabel.Text = String.Format("Alter {0}?", ingredient.name);
             UnitLabel.Text = ingredient.unit;
@@ -53,7 +55,7 @@ namespace MealPlannerMobile
         public void BtnUpdate_Clicked(object source, EventArgs e)
         {
             if(IsObjNumber(EntryAmount.Text))
-                ingredient.amount = Convert.ToInt32(EntryAmount.Text);
+                ingredient.amount = Convert.ToDouble(EntryAmount.Text);
             ReturnIngredient();
             ClosePopup();
         }
@@ -65,7 +67,7 @@ namespace MealPlannerMobile
         /// <param name="e"></param>
         public void BtnDelete_Clicked(object source, EventArgs e)
         {
-            ingredient = null;
+            ingredient.amount = 0;
             ReturnIngredient();
             ClosePopup();
         }
