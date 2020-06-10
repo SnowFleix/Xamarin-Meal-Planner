@@ -7,7 +7,18 @@
              x:Class="MealPlannerMobile.ViewRecipe">
     <ContentPage.Content>
         <ScrollView>
-            
+            <StackLayout>
+                <Label x:Name="TitleLabel" />
+                <Image Source="{Binding image}"/>
+                <Label Text="Ingredients: " />
+                <ListView x:Name="ListView_Ingredients" InputTransparent="True" ItemsSource="{Binding extendedIngredients}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

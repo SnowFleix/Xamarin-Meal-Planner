@@ -130,10 +130,7 @@ namespace MealPlannerMobile
             else if (((int)response.StatusCode) == 0)
                 throw new Exception((int)response.StatusCode + "Error calling GetRandomRecipes: " + response.ErrorMessage + response.ErrorMessage);
 
-            if(ingredientName.ToLower() == "olive oil")
-                return JsonConvert.DeserializeObject<ConversionResponse>(response.Content).targetAmount;
-            else
-                return JsonConvert.DeserializeObject<ConversionResponse>(response.Content).targetAmount;
+            return JsonConvert.DeserializeObject<ConversionResponse>(response.Content).targetAmount;
         }
     }
 }
