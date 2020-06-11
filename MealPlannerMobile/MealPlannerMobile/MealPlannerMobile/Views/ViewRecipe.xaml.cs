@@ -14,6 +14,14 @@ namespace MealPlannerMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewRecipe : ContentPage
     {
+        private string IngredientName, IngredientAmount, IngredientUnit;
+        public string IngredientTemplate
+        {
+            get
+            {
+                return string.Format("{0} {1} {2}", IngredientName, IngredientAmount, IngredientUnit);
+            }
+        }
         public ViewRecipe(Recipe recipe)
         {
             InitializeComponent();

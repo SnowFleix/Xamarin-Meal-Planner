@@ -14,7 +14,11 @@
                 <ListView x:Name="ListView_Ingredients" InputTransparent="True" ItemsSource="{Binding extendedIngredients}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            
+                            <ViewCell>
+                                <StackLayout>
+                                    
+                                </StackLayout>
+                            </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
