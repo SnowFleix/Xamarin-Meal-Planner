@@ -13,5 +13,10 @@ namespace MealPlannerMobile
     {
         public string name { get; set; }
         public InstructionSteps[] steps { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format("");
+        }
     }
 }

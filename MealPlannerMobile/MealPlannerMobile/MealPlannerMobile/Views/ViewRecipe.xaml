@@ -16,8 +16,18 @@
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout>
-                                    
+                                    <Label Text="{Binding IngredientTemplate}" />
                                 </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Label Text="Instructions: "/>
+                <ListView x:Name="" InputTransparent="True" ItemsSource="{Binding analyzedInstructions}" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text="{Binding AnalisedInstructions}" />
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

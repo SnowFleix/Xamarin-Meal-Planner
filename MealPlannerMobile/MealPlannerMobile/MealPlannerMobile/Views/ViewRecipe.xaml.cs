@@ -15,6 +15,10 @@ namespace MealPlannerMobile
     public partial class ViewRecipe : ContentPage
     {
         private string IngredientName, IngredientAmount, IngredientUnit;
+
+        /// <summary>
+        /// Simple struct to return a formatted ingredient, refactor to MVVM or MV 
+        /// </summary>
         public string IngredientTemplate
         {
             get
@@ -22,6 +26,7 @@ namespace MealPlannerMobile
                 return string.Format("{0} {1} {2}", IngredientName, IngredientAmount, IngredientUnit);
             }
         }
+
         public ViewRecipe(Recipe recipe)
         {
             InitializeComponent();
