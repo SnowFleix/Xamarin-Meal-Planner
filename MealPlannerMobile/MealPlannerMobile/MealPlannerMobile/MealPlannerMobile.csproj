@@ -20,11 +20,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Assets\TestData\Repository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\TestData\TestingData.JSON" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Assets\TestData\TestingData.JSON" />
+    <Resource Include="Assets\TestData\Repository.cs" />
+    <Resource Include="Assets\TestData\TestingData.JSON" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +43,6 @@
 
   <ItemGroup>
     <Folder Include="Assets\Images\" />
-    <Folder Include="Models\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 

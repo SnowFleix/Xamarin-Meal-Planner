@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,6 +44,15 @@ namespace MealPlannerMobile
         public string[] meta { get; set; } 
         public string[] metaInformation { get; set; } 
         public Measures measures { get; set; }
+
+        /// <summary>
+        /// Returns a string of the name amount and unit e.g. - Broccoli 0.75 cups
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return String.Format("- {0} {1} {2}", name, amount, unit);
+        }
     }
 
     /// <summary>
@@ -65,4 +75,6 @@ namespace MealPlannerMobile
         public string[] meta { get; set; }
         public string image { get; set; }                   // the url where the image is saved
     }
+
+    
 }

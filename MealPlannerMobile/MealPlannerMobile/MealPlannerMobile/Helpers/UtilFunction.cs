@@ -1,13 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using MealPlannerMobile;
+using Xamarin.Forms;
 
-namespace MealPlannerMobile
+namespace Extensions
 {
+    public static class Convertion
+    {
+        /// <summary>
+        /// Converts an object to a boolean
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool ToBoolean(object obj) { return Convert.ToBoolean(obj); }
+        /// <summary>
+        /// Converts an object to an int32
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static int ToInt(object obj) { return Convert.ToInt32(obj); }
+        /// <summary>
+        /// Converts any object to a string
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string ToString(object obj) { return Convert.ToString(obj); }
+        /// <summary>
+        /// Converts an object to a double
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static double ToDouble(object obj) { return Convert.ToDouble(obj); }
+        /// <summary>
+        /// Converts all the ingredients in an array to a list of strings
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static List<string> ToList(Ingredient[] obj) { return obj.Select(x => x.ToString()).ToList(); }
+        /// <summary>
+        /// Converts all objects in an array to a list of strings
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static List<string> ToList(object[] obj) { return obj.Select(x => new string(x.ToString().ToCharArray())).ToList(); }
+        /// <summary>
+        /// Returns the time from mins to a readable amount to directly output to the user
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static string ToReadableTime(int time)
+        {
+            if (time == 0) return ""; // If the time is 0 then the step takes no time
+            int hours = 0;
+            int mins = time % 60;
+            if (time != mins)
+                hours = time / 60;
+            if (hours == 0)
+                return string.Format("Ready in {0} minutes", mins);
+            return string.Format("Ready in {0} hours and {1} minutes", hours, mins);
+        }
+    }
+
     public static class UtilFunction
     {
         /// <summary>
-        /// 
+        /// Converts an object to a string
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -22,7 +81,7 @@ namespace MealPlannerMobile
         }
 
         /// <summary>
-        /// 
+        /// Tries to convert the object to a double, if it can't catch the error
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -40,7 +99,7 @@ namespace MealPlannerMobile
         }
 
         /// <summary>
-        /// 
+        /// Splits a string into an array using .Split
         /// </summary>
         /// <param name="originalStr"></param>
         /// <param name="splitChar"></param>

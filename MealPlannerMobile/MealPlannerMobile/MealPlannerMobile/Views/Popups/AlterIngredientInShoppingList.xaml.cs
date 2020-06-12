@@ -11,7 +11,7 @@ using Rg.Plugins.Popup;
 using Rg.Plugins.Popup.Services;
 using Rg.Plugins.Popup.Pages;
 
-using static MealPlannerMobile.UtilFunction;
+using Extensions;
 
 namespace MealPlannerMobile
 {
@@ -54,7 +54,7 @@ namespace MealPlannerMobile
         /// <param name="e"></param>
         public void BtnUpdate_Clicked(object source, EventArgs e)
         {
-            if(IsObjNumber(EntryAmount.Text))
+            if(UtilFunction.IsObjNumber(EntryAmount.Text))
                 ingredient.amount = Convert.ToDouble(EntryAmount.Text);
             ReturnIngredient();
             ClosePopup();

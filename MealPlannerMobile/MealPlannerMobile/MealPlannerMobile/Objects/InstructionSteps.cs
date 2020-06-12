@@ -33,6 +33,15 @@ namespace MealPlannerMobile
     {
         public int number { get; set; }
         public string unit { get; set; }
+
+        /// <summary>
+        /// Overrides the ToString method will return e.g. 12 mins
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return number.ToString() + " " + unit;
+        }
     }
 
     /// <summary>
@@ -45,5 +54,14 @@ namespace MealPlannerMobile
         public StepIngredient[] ingredients { get; set; }
         public StepEquiptment[] equiptment { get; set; }
         public StepLength length { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

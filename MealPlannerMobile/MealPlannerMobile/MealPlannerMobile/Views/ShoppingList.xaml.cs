@@ -10,7 +10,7 @@ using Xamarin.Essentials;
 
 using Rg.Plugins.Popup.Services;
 
-using static MealPlannerMobile.UtilFunction;
+using Extensions;
 
 namespace MealPlannerMobile
 {
@@ -41,7 +41,7 @@ namespace MealPlannerMobile
             this.recipes = recipes;
             AddIngredientsToList();
             AccumulateIngredients();
-            lstView_shoppingItems.ItemsSource = ConvertIngredientsToString(AllIngredients).ToArray();
+            lstView_shoppingItems.ItemsSource = UtilFunction.ConvertIngredientsToString(AllIngredients).ToArray();
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace MealPlannerMobile
                     else
                     {
                         if (!String.IsNullOrWhiteSpace(i.unit) && !String.IsNullOrWhiteSpace(GetIngredient(i, tempIngredients).unit))
-                                GetIngredient(i, tempIngredients).amount += ConvertUnit(GetIngredient(i, tempIngredients).unit, i);                 // call the api to convert the units
+                                GetIngredient(i, tempIngredients).amount += UtilFunction.ConvertUnit(GetIngredient(i, tempIngredients).unit, i);    // call the api to convert the units
                         else
                             tempIngredients.Add(i);
                     }
@@ -118,14 +118,14 @@ namespace MealPlannerMobile
             if (e == null) return; // if e has been set to null, do not 'process' tapped event
 
             string ingredientName = e.Item.ToString();
-            string[] parsedName = ParseString(ingredientName, ' '); ingredientName = "";
+            string[] parsedName = UtilFunction.ParseString(ingredientName, ' '); ingredientName = "";
             string unit = parsedName.Last<string>();
-            if (IsObjNumber(unit))
+            if (UtilFunction.IsObjNumber(unit))
                 unit = "";
 
             for (int index = 0; index < parsedName.Length; index++)
             {
-                if (!IsObjNumber(parsedName[index]))
+                if (!UtilFunction.IsObjNumber(parsedName[index]))
                     ingredientName += parsedName[index] + " ";
                 else break;
             }
@@ -144,7 +144,7 @@ namespace MealPlannerMobile
                     AllIngredients.RemoveAt(objSender.ingredientIndex);
                 else if (AllIngredients[objSender.ingredientIndex].name == args.name)
                     AllIngredients[objSender.ingredientIndex] = args;
-                lstView_shoppingItems.ItemsSource = ConvertIngredientsToString(AllIngredients).ToArray();
+                lstView_shoppingItems.ItemsSource = UtilFunction.ConvertIngredientsToString(AllIngredients).ToArray();
             });
             MessagingCenter.Unsubscribe<RemoveItemFromListPopup>(this, "UpdateIngredient");
         }

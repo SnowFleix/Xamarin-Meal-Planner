@@ -14,9 +14,13 @@ namespace MealPlannerMobile
         public string name { get; set; }
         public InstructionSteps[] steps { get; set; }
 
-        public override string ToString()
+        /// <summary>
+        /// Returns the steps into a string list
+        /// </summary>
+        /// <returns></returns>
+        public List<string> ToList()
         {
-            return String.Format("");
+            return steps.Select(x => string.Format("{0} {1} \n {2}", x.number, x.length.ToString(), x.step)).ToList();
         }
     }
 }

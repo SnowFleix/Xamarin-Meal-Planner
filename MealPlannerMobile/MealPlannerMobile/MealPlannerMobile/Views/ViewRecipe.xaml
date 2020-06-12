@@ -6,32 +6,19 @@
              mc:Ignorable="d"
              x:Class="MealPlannerMobile.ViewRecipe">
     <ContentPage.Content>
+        <!--Need to remove the padding at the bottom of the listviews as well as format the cells in the list view-->
         <ScrollView>
             <StackLayout>
-                <Label x:Name="TitleLabel" />
-                <Image Source="{Binding image}"/>
+                <Label Text="{Binding RecipeName}" HorizontalOptions="Center" FontSize="35" TextColor="Black"/>
+                <Image Source="{Binding ImageURL}" HeightRequest="250" Aspect="AspectFit" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="{Binding PricePerServing}" />
+                    <Label Text="{Binding PrepTime}" />
+                </StackLayout>
                 <Label Text="Ingredients: " />
-                <ListView x:Name="ListView_Ingredients" InputTransparent="True" ItemsSource="{Binding extendedIngredients}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout>
-                                    <Label Text="{Binding IngredientTemplate}" />
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ListView x:Name="ListView_Ingredients" InputTransparent="True" ItemsSource="{Binding FormattedIngredients}" HasUnevenRows="True" />
                 <Label Text="Instructions: "/>
-                <ListView x:Name="" InputTransparent="True" ItemsSource="{Binding analyzedInstructions}" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Label Text="{Binding AnalisedInstructions}" />
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ListView x:Name="ListView_Steps" InputTransparent="True" ItemsSource="{Binding FormattedSteps}" HasUnevenRows="True" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
