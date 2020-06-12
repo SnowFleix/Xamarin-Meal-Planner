@@ -40,6 +40,8 @@ namespace MealPlannerMobile
         /// <returns></returns>
         public override string ToString()
         {
+            if (number == 0)
+                return "";
             return number.ToString() + " " + unit;
         }
     }

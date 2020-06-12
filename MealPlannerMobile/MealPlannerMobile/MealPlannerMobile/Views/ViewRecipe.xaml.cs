@@ -17,6 +17,7 @@ namespace MealPlannerMobile
         {
             InitializeComponent();
             this.BindingContext = new RecipeModel(recipe);
+            this.ListView_Ingredients.HeightRequest = (22 * recipe.extendedIngredients.Length);
         }
     }
 }

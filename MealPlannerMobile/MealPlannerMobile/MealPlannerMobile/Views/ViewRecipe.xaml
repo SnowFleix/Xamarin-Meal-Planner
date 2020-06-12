@@ -10,15 +10,41 @@
         <ScrollView>
             <StackLayout>
                 <Label Text="{Binding RecipeName}" HorizontalOptions="Center" FontSize="35" TextColor="Black"/>
-                <Image Source="{Binding ImageURL}" HeightRequest="250" Aspect="AspectFit" />
+                <Image Source="{Binding ImageURL}" HeightRequest="250" Aspect="AspectFit" Margin="0,30,0,10" />
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="{Binding PricePerServing}" />
-                    <Label Text="{Binding PrepTime}" />
+                    <Label Text="{Binding PricePerServing}" FontSize="14" TextColor="Orange" Padding="0,0,25,0" />
+                    <Label Text="{Binding PrepTime}" FontSize="14" TextColor="ForestGreen" Padding="0,0,25,0" />
                 </StackLayout>
-                <Label Text="Ingredients: " />
-                <ListView x:Name="ListView_Ingredients" InputTransparent="True" ItemsSource="{Binding FormattedIngredients}" HasUnevenRows="True" />
-                <Label Text="Instructions: "/>
-                <ListView x:Name="ListView_Steps" InputTransparent="True" ItemsSource="{Binding FormattedSteps}" HasUnevenRows="True" />
+                <Label Text="Ingredients: " FontSize="26" TextColor="Black" Padding="10,40,0,0" />
+                <ListView x:Name="ListView_Ingredients" InputTransparent="True" SeparatorVisibility="None" ItemsSource="{Binding Ingredients}" HasUnevenRows="True" HeightRequest="150">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Padding="20,5,0,0">
+                                    <Label Text="{Binding name}" TextColor="Black" FontSize="12" />
+                                    <Label Text="{Binding amount}" TextColor="Black" FontSize="12" />
+                                    <Label Text="{Binding unit}" TextColor="Black" FontSize="12" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Label Text="Instructions: " FontSize="26" TextColor="Black" Margin="0,20,0,0"/>
+                <ListView InputTransparent="True" SeparatorVisibility="None" ItemsSource="{Binding Steps}" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Margin="0,20,0,0">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Number}" Padding="0,0,50,0" FontSize="24" TextColor="Black" FontFamily="Heebo"/>
+                                        <Label Text="{Binding Time}" HorizontalOptions="End" FontSize="24" TextColor="Black" FontFamily="Heebo"/>
+                                    </StackLayout>
+                                    <Label Text="{Binding StepText}" TextColor="Black" FontSize="14"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
