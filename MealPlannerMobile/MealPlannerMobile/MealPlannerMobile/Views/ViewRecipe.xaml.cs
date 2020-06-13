@@ -17,6 +17,7 @@ namespace MealPlannerMobile
         {
             InitializeComponent();
             this.BindingContext = new RecipeModel(recipe);
+            // Stops the huge amount of white space at the bottom of the list view
             this.ListView_Ingredients.HeightRequest = (22 * recipe.extendedIngredients.Length);
         }
     }
