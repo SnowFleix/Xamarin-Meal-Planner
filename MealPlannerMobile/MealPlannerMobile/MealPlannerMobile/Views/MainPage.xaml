@@ -6,8 +6,12 @@
              mc:Ignorable="d"
              x:Class="MealPlannerMobile.MainPage">
 
-    <StackLayout>
-        
-    </StackLayout>
+    <ScrollView>
+        <StackLayout>
+            <AbsoluteLayout>
+                
+            </AbsoluteLayout>
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>
