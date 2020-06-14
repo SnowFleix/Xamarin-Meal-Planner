@@ -8,10 +8,18 @@
 
     <ScrollView>
         <StackLayout>
-            <AbsoluteLayout>
-                
+            <Image Source=""/> <!--Need to add a log image-->
+            <AbsoluteLayout x:Name="">
+                <Image Source="{Binding RecipeImage}" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" />
+                <AbsoluteLayout x:Name="" AbsoluteLayout.LayoutBounds="" AbsoluteLayout.LayoutFlags="All" Margin="">
+                    <StackLayout Margin="" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
+                        <Button Text="New Recipe" Clicked="" BackgroundColor="DarkRed" />
+                    </StackLayout>
+                </AbsoluteLayout>
             </AbsoluteLayout>
+            <ProgressBar x:Name="RecipeProgress" />
+            <Button Text="View Todays Recipes" Clicked=""/>
+            <Button Text="View Shopping List" Clicked=""/>
         </StackLayout>
     </ScrollView>
-
 </ContentPage>
