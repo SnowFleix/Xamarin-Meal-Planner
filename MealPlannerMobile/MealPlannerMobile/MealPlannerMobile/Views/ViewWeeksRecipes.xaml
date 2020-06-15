@@ -3,11 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:MealPlanner="clr-namespace:MealPlannerMobile" 
+             xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
              mc:Ignorable="d"
              x:Class="MealPlannerMobile.ViewWeeksRecipes">
     <ContentPage.Content>
-        <ScrollView>
-            
-        </ScrollView>
+        <cards:SfCardLayout BindableLayout.ItemsSource="{Binding CurrentRecipes}" SwipeDirection="Right" VisibleCardIndex="1">
+            <cards:SfCardView>
+                <MealPlanner:RecipeCard />
+            </cards:SfCardView>
+        </cards:SfCardLayout>
     </ContentPage.Content>
 </ContentPage>
