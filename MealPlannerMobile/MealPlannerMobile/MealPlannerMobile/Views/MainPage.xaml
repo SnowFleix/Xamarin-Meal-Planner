@@ -3,15 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
              mc:Ignorable="d"
              x:Class="MealPlannerMobile.MainPage">
-
+    <!--TODO: Test and fully implement the home page
+              Implement Syncfusion Cards instead of an absolute layout-->
     <ScrollView>
         <StackLayout>
-            <Image Source=""/> <!--Need to add a log image-->
-            <AbsoluteLayout x:Name="">
+            <Image Source=""/>
+            <!--Need to add a log image-->
+            <AbsoluteLayout x:Name="ImageCard">
                 <Image Source="{Binding RecipeImage}" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" />
-                <AbsoluteLayout x:Name="" AbsoluteLayout.LayoutBounds="" AbsoluteLayout.LayoutFlags="All" Margin="">
+                <AbsoluteLayout x:Name="ButtonsLayout" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" Margin="">
                     <StackLayout Margin="" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
                         <Button Text="New Recipe" Clicked="" BackgroundColor="DarkRed" />
                     </StackLayout>

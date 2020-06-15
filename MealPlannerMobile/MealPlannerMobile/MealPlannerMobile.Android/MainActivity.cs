@@ -19,7 +19,8 @@ namespace MealPlannerMobile.Droid
 
             base.OnCreate(savedInstanceState);
 
-            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState); // initialise the plugin
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);              // initialise the plugin
+            global::Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental");   // allows me to use radio buttons and other experimental 
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

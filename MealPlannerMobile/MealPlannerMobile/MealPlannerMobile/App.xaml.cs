@@ -12,7 +12,8 @@ namespace MealPlannerMobile
 
             //Result apiResult = new spoontacularAPI().GetRandomRecipe("", "", "", "main course", 28);
             Result apiResult = new Repository().result;
-            MainPage = new ViewRecipe(apiResult.results[0]);
+            MainPage = new PlanWeekPage();
+            //MainPage = new ViewRecipe(apiResult.results[0]);
             //MainPage = new ShoppingList(apiResult.results);
             //MainPage = new RecipeSettings();
             //MainPage = new MainPage();
