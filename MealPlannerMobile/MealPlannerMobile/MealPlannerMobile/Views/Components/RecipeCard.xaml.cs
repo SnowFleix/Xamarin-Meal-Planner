@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace MealPlannerMobile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class View1 : ContentView
+    public partial class RecipeCard : StackLayout
     {
-        public View1()
+        public RecipeCard()
         {
             InitializeComponent();
         }

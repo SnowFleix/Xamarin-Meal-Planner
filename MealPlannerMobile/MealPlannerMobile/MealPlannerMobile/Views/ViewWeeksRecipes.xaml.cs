@@ -16,5 +16,15 @@ namespace MealPlannerMobile
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void OnCardTapped(object sender, EventArgs e)
+        {
+            // TODO: Find out how to 
+        }
     }
 }
