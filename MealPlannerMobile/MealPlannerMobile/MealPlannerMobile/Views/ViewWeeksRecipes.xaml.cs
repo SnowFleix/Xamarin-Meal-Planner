@@ -12,7 +12,7 @@ namespace MealPlannerMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewWeeksRecipes : ContentPage
     {
-        public ViewWeeksRecipes()
+        public ViewWeeksRecipes(Recipe[] recipes)
         {
             InitializeComponent();
         }

@@ -20,12 +20,14 @@ namespace MealPlannerMobile
 
         public async void ViewTodaysRecipe_Clicked(object sender, EventArgs e)
         {
-
+            Recipe[] TodaysRecipes = { }; // Need to get recipes that are only for today
+            await Navigation.PushModalAsync(new ViewWeeksRecipes(TodaysRecipes));
         }
 
         public async void ViewAllRecipes_Clicked(object sender, EventArgs e)
         {
-
+            Recipe[] AllRecipes = { }; // Need to get recipes that are only for today
+            await Navigation.PushModalAsync(new ViewWeeksRecipes(AllRecipes));
         }
     }
 }
