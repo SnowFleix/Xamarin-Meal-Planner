@@ -24,7 +24,7 @@ namespace MealPlannerMobile
         /// <param name="e"></param>
         public void OnCardTapped(object sender, EventArgs e)
         {
-            // TODO: Find out how to 
+            // TODO: Find out how to get the data from the tapped card
         }
     }
 }

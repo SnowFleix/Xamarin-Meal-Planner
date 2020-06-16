@@ -13,7 +13,7 @@
                        HorizontalOptions="Center" 
                        FontSize="42" FontFamily="Calibri"
                        TextColor="Black" />
-                <ListView x:Name="lstView_shoppingItems" ItemTapped="LstView_ShoppingItems_Tapped" />
+                <ListView x:Name="lstView_shoppingItems" ItemTapped="LstView_ShoppingItems_Tapped" /> <!--Need to change this to be formatted better and use binding-->
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage NavigationPage.HasNavigationBar="False"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -21,8 +22,8 @@
                 </AbsoluteLayout>
             </AbsoluteLayout>
             <ProgressBar x:Name="RecipeProgress" />
-            <Button Text="View Todays Recipes" Clicked=""/>
-            <Button Text="View Shopping List" Clicked=""/>
+            <Button Text="View Todays Recipes" Clicked="ViewTodaysRecipe_Clicked"/>
+            <Button Text="View Shopping List" Clicked="ViewAllRecipes_Clicked"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

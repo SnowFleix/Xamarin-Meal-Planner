@@ -16,7 +16,7 @@ namespace MealPlannerMobile
 {
     /// <remarks>
     /// TODO: Refactor the code and make it more readable as well as any abstractions
-    ///       Create popups for changing the amounts as well as deleting some ingredients
+    ///       Refactor to use bindings rather than doing everything in the code behind
     /// </remarks>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShoppingList : ContentPage
@@ -115,7 +115,7 @@ namespace MealPlannerMobile
         [Obsolete]
         public async void LstView_ShoppingItems_Tapped(object source, ItemTappedEventArgs e)
         {
-            if (e == null) return; // if e has been set to null, do not 'process' tapped event
+            if (e == null) return; // if e has been set to null, do not process tapped event
 
             string ingredientName = e.Item.ToString();
             string[] parsedName = UtilFunction.ParseString(ingredientName, ' '); ingredientName = "";
@@ -147,6 +147,7 @@ namespace MealPlannerMobile
                 lstView_shoppingItems.ItemsSource = UtilFunction.ConvertIngredientsToString(AllIngredients).ToArray();
             });
             MessagingCenter.Unsubscribe<RemoveItemFromListPopup>(this, "UpdateIngredient");
+            lstView_shoppingItems.SelectedItem = null;
         }
     }
 }

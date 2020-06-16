@@ -18,6 +18,14 @@ namespace MealPlannerMobile
             InitializeComponent();
         }
 
+        public async void ViewTodaysRecipe_Clicked(object sender, EventArgs e)
+        {
 
+        }
+
+        public async void ViewAllRecipes_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
