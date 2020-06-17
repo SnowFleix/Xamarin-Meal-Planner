@@ -16,5 +16,10 @@ namespace MealPlannerMobile
         {
             InitializeComponent();
         }
+
+        public void NewRecipeClicked(object source, EventArgs e)
+        {
+
+        }
     }
 }
