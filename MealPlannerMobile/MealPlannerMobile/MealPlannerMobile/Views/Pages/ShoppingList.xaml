@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MealPlannerMobile.ShoppingList">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Ingredients:"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Center" 
+                       FontSize="42" FontFamily="Calibri"
+                       TextColor="Black" />
+            <ListView x:Name="lstView_shoppingItems" ItemsSource="{Binding Ingredients}" ItemTapped="LstView_ShoppingItems_Tapped" HasUnevenRows="True">
+                <!--Need to change this to be formatted better and use binding-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="20,5,0,0">
+                                <Label Text="{Binding name}" TextColor="Black" FontSize="12" />
+                                <Label Text="{Binding amount}" TextColor="Black" FontSize="12" />
+                                <Label Text="{Binding unit}" TextColor="Black" FontSize="12" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

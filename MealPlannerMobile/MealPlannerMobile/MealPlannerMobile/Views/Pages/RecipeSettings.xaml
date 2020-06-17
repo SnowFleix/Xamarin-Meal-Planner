@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
+<!--TODO: change to allow binding with the persistant data-->
             <!--Diet row-->
             <Label Grid.Row="0" Grid.Column="0" 
                    FontSize="40"

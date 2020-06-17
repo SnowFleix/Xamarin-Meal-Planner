@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:MealPlanner="clr-namespace:MealPlannerMobile" 
+             xmlns:MealPlanner="clr-namespace:MealPlannerMobile;assembly=MealPlannerMobile" 
              xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
              mc:Ignorable="d"
              x:Class="MealPlannerMobile.ViewWeeksRecipes">
     <ContentPage.Content>
-        <cards:SfCardLayout BindableLayout.ItemsSource="{Binding CurrentRecipes}" SwipeDirection="Right" VisibleCardIndex="1" CardTappedCommand="OnCardTapped">
+        <cards:SfCardLayout BindableLayout.ItemsSource="{Binding CurrentRecipes}" SwipeDirection="Right" VisibleCardIndex="1" > <!--CardTappedCommand="OnCardTapped"-->
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <cards:SfCardView>

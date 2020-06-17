@@ -22,14 +22,14 @@ namespace MealPlannerMobile
     public partial class ShoppingList : ContentPage
     {
         private readonly Recipe[] recipes;
-        private List<Ingredient> AllIngredients = new List<Ingredient>();
+        private List<Ingredient> Ingredients = new List<Ingredient>();
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="recipes"></param>
         /// <remarks>should eventually work with the persistent data stored after doing a get plan request, rather than being sent an array</remarks>
-        public ShoppingList(Recipe[] recipes)
+        public ShoppingList(/*Recipe[] recipes*/)
         {
             InitializeComponent();
 
@@ -38,10 +38,10 @@ namespace MealPlannerMobile
             if (DeviceInfo.Platform == DevicePlatform.iOS)
                 Padding = new Thickness(0, 35, 0, 0);
 
-            this.recipes = recipes;
+            this.recipes = Repository.result.results;
             AddIngredientsToList();
             AccumulateIngredients();
-            lstView_shoppingItems.ItemsSource = UtilFunction.ConvertIngredientsToString(AllIngredients).ToArray();
+            lstView_shoppingItems.ItemsSource = Ingredients;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace MealPlannerMobile
         public void AddIngredientsToList()
         {
             foreach (Recipe r in recipes)
-                AllIngredients.AddRange(r.extendedIngredients);
+                Ingredients.AddRange(r.extendedIngredients);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace MealPlannerMobile
         private void AccumulateIngredients()
         {
             List<Ingredient> tempIngredients = new List<Ingredient>();
-            foreach (Ingredient i in AllIngredients)
+            foreach (Ingredient i in Ingredients)
             {
                 if (!CheckIfIngredientIsAlreadyInList(i, tempIngredients))
                     tempIngredients.Add(i);
@@ -76,7 +76,7 @@ namespace MealPlannerMobile
                     }
                 }
             }
-            AllIngredients = tempIngredients;
+            Ingredients = tempIngredients;
         }
 
         /// <summary>
@@ -115,36 +115,36 @@ namespace MealPlannerMobile
         [Obsolete]
         public async void LstView_ShoppingItems_Tapped(object source, ItemTappedEventArgs e)
         {
-            if (e == null) return; // if e has been set to null, do not process tapped event
+            if (!UtilFunction.IsObjIngredient(e.Item)) return; // if e has been set to null, do not process tapped event
 
-            string ingredientName = e.Item.ToString();
-            string[] parsedName = UtilFunction.ParseString(ingredientName, ' '); ingredientName = "";
-            string unit = parsedName.Last<string>();
-            if (UtilFunction.IsObjNumber(unit))
-                unit = "";
+            //string ingredientName = e.Item.ToString();
+            //string[] parsedName = UtilFunction.ParseString(ingredientName, ' '); ingredientName = "";
+            //string unit = parsedName.Last<string>();
+            //if (UtilFunction.IsObjNumber(unit))
+            //    unit = "";
 
-            for (int index = 0; index < parsedName.Length; index++)
-            {
-                if (!UtilFunction.IsObjNumber(parsedName[index]))
-                    ingredientName += parsedName[index] + " ";
-                else break;
-            }
-            ingredientName = ingredientName.Trim();
+            //for (int index = 0; index < parsedName.Length; index++)
+            //{
+            //    if (!UtilFunction.IsObjNumber(parsedName[index]))
+            //        ingredientName += parsedName[index] + " ";
+            //    else break;
+            //}
+            //ingredientName = ingredientName.Trim();
 
             int i; // i for index
-            for (i = 0; i < AllIngredients.Count; i++)
-                if (ingredientName == AllIngredients[i].name /*&& unit == AllIngredients[i].unit*/)
+            for (i = 0; i < Ingredients.Count; i++)
+                if (((Ingredient)e.Item).name == Ingredients[i].name /*&& unit == AllIngredients[i].unit*/)
                     break;
 
-            await PopupNavigation.PushAsync(new AlterIngredientInShoppingList(AllIngredients[i], i));
+            await PopupNavigation.PushAsync(new AlterIngredientInShoppingList(Ingredients[i], i));
             MessagingCenter.Subscribe<AlterIngredientInShoppingList, Ingredient>(this, "UpdateIngredient", (objSender, args) =>
             {
                 // 
-                if (args.amount == 0 && AllIngredients[objSender.ingredientIndex].name == args.name)
-                    AllIngredients.RemoveAt(objSender.ingredientIndex);
-                else if (AllIngredients[objSender.ingredientIndex].name == args.name)
-                    AllIngredients[objSender.ingredientIndex] = args;
-                lstView_shoppingItems.ItemsSource = UtilFunction.ConvertIngredientsToString(AllIngredients).ToArray();
+                if (args.amount == 0 && Ingredients[objSender.ingredientIndex].name == args.name)
+                    Ingredients.RemoveAt(objSender.ingredientIndex);
+                else if (Ingredients[objSender.ingredientIndex].name == args.name)
+                    Ingredients[objSender.ingredientIndex] = args;
+                lstView_shoppingItems.ItemsSource = UtilFunction.ConvertIngredientsToString(Ingredients).ToArray();
             });
             MessagingCenter.Unsubscribe<RemoveItemFromListPopup>(this, "UpdateIngredient");
             lstView_shoppingItems.SelectedItem = null;

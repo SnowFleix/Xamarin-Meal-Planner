@@ -180,5 +180,23 @@ namespace Extensions
         {
             return new spoontacularAPI().ConvertAmount(ingredient.name, ingredient.amount, ingredient.unit, unit);
         }
+
+        /// <summary>
+        /// Tries to convert an object to an ingredient, if it can't, returns false
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsObjIngredient(object obj)
+        {
+            try
+            {
+                string name = ((Ingredient)obj).name;
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

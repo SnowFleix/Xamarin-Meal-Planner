@@ -12,7 +12,7 @@ namespace MealPlannerMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewWeeksRecipes : ContentPage
     {
-        public ViewWeeksRecipes(Recipe[] recipes)
+        public ViewWeeksRecipes()
         {
             InitializeComponent();
         }
@@ -22,9 +22,10 @@ namespace MealPlannerMobile
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void OnCardTapped(object sender, EventArgs e)
+        public async void OnCardTapped(object sender, EventArgs e)
         {
             // TODO: Find out how to get the data from the tapped card
+            await Navigation.PushModalAsync(new ViewRecipe(  new Recipe()  ));
         }
     }
 }

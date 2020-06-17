@@ -15,15 +15,15 @@
             <!--Need to add a log image-->
             <AbsoluteLayout x:Name="ImageCard">
                 <Image Source="{Binding RecipeImage}" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" />
-                <AbsoluteLayout x:Name="ButtonsLayout" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" Margin="">
-                    <StackLayout Margin="" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
-                        <Button Text="New Recipe" Clicked="" BackgroundColor="DarkRed" />
+                <AbsoluteLayout x:Name="ButtonsLayout" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" Margin="0,0,0,0">
+                    <StackLayout Margin="0,0,0,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
+                        <Button Text="New Recipe" Clicked="" BackgroundColor="Red" />
                     </StackLayout>
                 </AbsoluteLayout>
             </AbsoluteLayout>
             <ProgressBar x:Name="RecipeProgress" />
-            <Button Text="View Todays Recipes" Clicked="ViewTodaysRecipe_Clicked"/>
-            <Button Text="View Shopping List" Clicked="ViewAllRecipes_Clicked"/>
+            <Button Text="View Recipes" Clicked="ViewRecipes_Clicked"/>
+            <Button Text="View Shopping List" Clicked="ViewShoppingList_Clicked"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>
