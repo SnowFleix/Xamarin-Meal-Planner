@@ -4,9 +4,7 @@
             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:MealPlanner="clr-namespace:MealPlannerMobile;assembly=MealPlannerMobile" 
-            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             mc:Ignorable="d"
-            android:TabbedPage.ToolbarPlacement="Bottom"
             x:Class="MealPlannerMobile.HomeTabbedPage">
 
     <MealPlanner:MainPage Title="Home" IconImageSource=""/>

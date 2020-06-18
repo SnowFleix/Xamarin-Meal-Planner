@@ -16,7 +16,6 @@ namespace MealPlannerMobile
 {
     /// <remarks>
     /// TODO: Refactor the code and make it more readable as well as any abstractions
-    ///       Refactor to use bindings rather than doing everything in the code behind
     /// </remarks>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShoppingList : ContentPage
@@ -38,7 +37,7 @@ namespace MealPlannerMobile
             if (DeviceInfo.Platform == DevicePlatform.iOS)
                 Padding = new Thickness(0, 35, 0, 0);
 
-            this.recipes = Repository.result.results;
+            this.recipes = Repository.result.results; // use persistent data instead
             AddIngredientsToList();
             AccumulateIngredients();
             lstView_shoppingItems.ItemsSource = Ingredients;
