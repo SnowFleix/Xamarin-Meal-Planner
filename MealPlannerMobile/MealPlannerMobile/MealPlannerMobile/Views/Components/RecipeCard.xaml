@@ -4,17 +4,21 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Grid>
-        <AbsoluteLayout x:Name="ImageCard" Grid.Row="0" Grid.ColumnSpan="2">
-            <Image Source="{Binding RecipeImage}" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <AbsoluteLayout x:Name="ImageCard" Grid.Row="0" Grid.ColumnSpan="2" Padding="10,10,10,10">
+            <Image Source="{Binding image}" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" />
             <AbsoluteLayout x:Name="ButtonsLayout" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" Margin="0,0,0,0">
-                <StackLayout Margin="0,0,0,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
-                    <Button Text="New Recipe" Clicked="NewRecipeClicked" BackgroundColor="DarkRed" />
+                <StackLayout Margin="275,0,0,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
+                    <Button Text="New" Clicked="NewRecipeClicked" BackgroundColor="#EE0000" HeightRequest="40" />
                 </StackLayout>
             </AbsoluteLayout>
         </AbsoluteLayout>
-        <Label Text="{Binding RecipeName}" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <Label Text="{Binding PrepTime}" Grid.Row="2" Grid.Column="1"/>
-        <Label Text="{Binding Price}" Grid.Row="2" Grid.Column="1"/>
-        <Label Text="{Binding Calories}" Grid.Row="3" Grid.ColumnSpan="2" />
+        <Label Text="{Binding title}" Grid.Row="1" Grid.ColumnSpan="2" FontSize="28" FontFamily="Heebo" TextColor="Black" HorizontalTextAlignment="Center" Padding="0,15,0,15"/>
+        <Label Text="{Binding readyInMinutes, StringFormat='{0} minutes'}" Grid.Row="2" Grid.Column="0" HorizontalOptions="Center" FontSize="18" TextColor="Green" />
+        <Label Text="{Binding pricePerServing, StringFormat='{0} pence'}" Grid.Row="2" Grid.Column="1" HorizontalOptions="Center" FontSize="18" TextColor="Orange" />
+        <Label Text="{Binding Calories}" Grid.Row="3" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
     </Grid>
 </StackLayout>

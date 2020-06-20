@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Windows.Input;
 using MealPlannerMobile;
 using Xamarin.Forms;
 
@@ -79,7 +79,6 @@ namespace Extensions
             else
                 return Convert.ToString(obj);
         }
-
         /// <summary>
         /// Tries to convert the object to a double, if it can't catch the error
         /// </summary>
@@ -97,7 +96,6 @@ namespace Extensions
                 return false;
             }
         }
-
         /// <summary>
         /// Splits a string into an array using .Split
         /// </summary>
@@ -108,7 +106,6 @@ namespace Extensions
         {
             return originalStr.Split(splitChar);
         }
-
         /// <summary>
         /// Convert the list of sorted ingredients to a list of strings that can be used as an item source
         /// </summary>
@@ -124,7 +121,6 @@ namespace Extensions
             retLst.Sort();
             return retLst;
         }
-
         /// <summary>
         /// Sorts the amount into a more readable amounts so there are no '320 garlic cloves'
         /// </summary>
@@ -169,7 +165,6 @@ namespace Extensions
 
             return ingredient;
         }
-
         /// <summary>
         /// Uses the sponaculat api to convert the amount from one unit to another
         /// </summary>
@@ -180,7 +175,6 @@ namespace Extensions
         {
             return new spoontacularAPI().ConvertAmount(ingredient.name, ingredient.amount, ingredient.unit, unit);
         }
-
         /// <summary>
         /// Tries to convert an object to an ingredient, if it can't, returns false
         /// </summary>
@@ -199,4 +193,32 @@ namespace Extensions
             }
         }
     }
+
+    //public class RelayCommand : ICommand
+    //{
+    //    private readonly Predicate<object> _canExecute;
+    //    private readonly Action<object> _execute;
+
+    //    public RelayCommand(Predicate<object> canExecute, Action<object> execute)
+    //    {
+    //        _canExecute = canExecute;
+    //        _execute = execute;
+    //    }
+
+    //    public event EventHandler CanExecuteChanged
+    //    {
+    //        add => System.Windows.Input.CommandManager.RequerySuggested += value;
+    //        remove => System.Windows.Input.CommandManager.RequerySuggested -= value;
+    //    }
+
+    //    public bool CanExecute(object parameter)
+    //    {
+    //        return _canExecute(parameter);
+    //    }
+
+    //    public void Execute(object parameter)
+    //    {
+    //        _execute(parameter);
+    //    }
+    //}
 }

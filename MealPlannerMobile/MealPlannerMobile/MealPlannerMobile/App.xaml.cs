@@ -8,6 +8,9 @@ namespace MealPlannerMobile
     {
         public App()
         {
+            DotNetEnv.Env.Load(); // Need to fix this later to use .env files
+
+            
             InitializeComponent();
 
             //Result apiResult = new spoontacularAPI().GetRandomRecipe("", "", "", "main course", 28);
@@ -23,5 +26,7 @@ namespace MealPlannerMobile
 
         protected override void OnResume()
         { }
+
+        
     }
 }

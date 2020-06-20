@@ -16,6 +16,7 @@ namespace MealPlannerMobile
         public MainPage()
         {
             InitializeComponent();
+            this.BindingContext = Repository.result;
         }
 
         public async void ViewRecipes_Clicked(object sender, EventArgs e)

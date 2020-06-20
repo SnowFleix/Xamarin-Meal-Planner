@@ -11,9 +11,9 @@ namespace MealPlannerMobile
 {
     public class spoontacularAPI
     {
-        private readonly string host = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
-        private readonly string key = "62431552c5msh0329ee0958a0b99p1180a6jsndbc779cdf5fa";
-        // private readonly string spoonKey = "144e0e828b9547229c2304724cc81063"; // The key for the main api website
+        private readonly string host = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"; //DotNetEnv.Env.GetString("RAPID_APIHOST");
+        private readonly string key = "62431552c5msh0329ee0958a0b99p1180a6jsndbc779cdf5fa"; //DotNetEnv.Env.GetString("RAPID_APIKEY");
+        // private readonly string spoonKey = DotNetEnv.Env.GetString("SPOONACULAR_APIKEY"); // The key for the main api website
 
         private readonly Dictionary<String, String> _defaultHeaderMap = new Dictionary<String, String>();
 

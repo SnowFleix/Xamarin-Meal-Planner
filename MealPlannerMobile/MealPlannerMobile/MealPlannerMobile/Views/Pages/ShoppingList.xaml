@@ -13,7 +13,6 @@
                        FontSize="42" FontFamily="Calibri"
                        TextColor="Black" />
             <ListView x:Name="lstView_shoppingItems" ItemsSource="{Binding Ingredients}" ItemTapped="LstView_ShoppingItems_Tapped" HasUnevenRows="True">
-                <!--Need to change this to be formatted better and use binding-->
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

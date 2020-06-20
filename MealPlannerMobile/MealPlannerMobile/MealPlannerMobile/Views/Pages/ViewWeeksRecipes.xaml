@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:MealPlanner="clr-namespace:MealPlannerMobile;assembly=MealPlannerMobile" 
              xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
              mc:Ignorable="d"
              x:Class="MealPlannerMobile.ViewWeeksRecipes">
     <ContentPage.Content>
-        <cards:SfCardLayout BindableLayout.ItemsSource="{Binding CurrentRecipes}" SwipeDirection="Right" VisibleCardIndex="1" > <!--CardTappedCommand="OnCardTapped"-->
+        <cards:SfCardLayout BindableLayout.ItemsSource="{Binding results}" SwipeDirection="Right" > CardTappedCommand="{Binding OnTap}"
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <cards:SfCardView>
+                    <cards:SfCardView VerticalOptions="Center" HeightRequest="425" BackgroundColor="#4AC948">
                         <MealPlanner:RecipeCard />
                     </cards:SfCardView>
                 </DataTemplate>

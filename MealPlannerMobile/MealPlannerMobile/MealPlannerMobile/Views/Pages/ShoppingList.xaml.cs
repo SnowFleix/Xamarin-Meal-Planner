@@ -116,20 +116,6 @@ namespace MealPlannerMobile
         {
             if (!UtilFunction.IsObjIngredient(e.Item)) return; // if e has been set to null, do not process tapped event
 
-            //string ingredientName = e.Item.ToString();
-            //string[] parsedName = UtilFunction.ParseString(ingredientName, ' '); ingredientName = "";
-            //string unit = parsedName.Last<string>();
-            //if (UtilFunction.IsObjNumber(unit))
-            //    unit = "";
-
-            //for (int index = 0; index < parsedName.Length; index++)
-            //{
-            //    if (!UtilFunction.IsObjNumber(parsedName[index]))
-            //        ingredientName += parsedName[index] + " ";
-            //    else break;
-            //}
-            //ingredientName = ingredientName.Trim();
-
             int i; // i for index
             for (i = 0; i < Ingredients.Count; i++)
                 if (((Ingredient)e.Item).name == Ingredients[i].name /*&& unit == AllIngredients[i].unit*/)

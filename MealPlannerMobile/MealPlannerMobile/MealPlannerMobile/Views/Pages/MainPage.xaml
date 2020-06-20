@@ -5,25 +5,31 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
+             xmlns:MealPlanner="clr-namespace:MealPlannerMobile;assembly=MealPlannerMobile" 
              mc:Ignorable="d"
              x:Class="MealPlannerMobile.MainPage">
     <!--TODO: Test and fully implement the home page
               Implement Syncfusion Cards instead of an absolute layout-->
     <ScrollView>
-        <StackLayout>
-            <Image Source=""/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="425" />
+            </Grid.RowDefinitions>
+            <Image Source="" Grid.Row="0"/>
             <!--Need to add a log image-->
-            <AbsoluteLayout x:Name="ImageCard">
-                <Image Source="{Binding RecipeImage}" Aspect="AspectFill" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" />
-                <AbsoluteLayout x:Name="ButtonsLayout" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" Margin="0,0,0,0">
-                    <StackLayout Margin="0,0,0,0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
-                        <Button Text="New Recipe" Clicked="" BackgroundColor="Red" />
-                    </StackLayout>
-                </AbsoluteLayout>
-            </AbsoluteLayout>
-            <ProgressBar x:Name="RecipeProgress" />
-            <Button Text="View Recipes" Clicked="ViewRecipes_Clicked"/>
-            <Button Text="View Shopping List" Clicked="ViewShoppingList_Clicked"/>
-        </StackLayout>
+            <cards:SfCardLayout BindableLayout.ItemsSource="{Binding results}" SwipeDirection="Right" Grid.Row="1"> <!--CardTappedCommand="{Binding OnTap}"-->
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <cards:SfCardView VerticalOptions="Center" HeightRequest="425" BackgroundColor="#4AC948">
+                            <MealPlanner:RecipeCard />
+                        </cards:SfCardView>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </cards:SfCardLayout>
+            <ProgressBar x:Name="RecipeProgress" Grid.Row="2" Margin="15,0,15,0" />
+            <Button Text="View Recipes" Clicked="ViewRecipes_Clicked" Padding="0,20,0,20" Margin="15,0,15,0" Grid.Row="3"/>
+            <Button Text="View Shopping List" Clicked="ViewShoppingList_Clicked" Padding="0,20,0,20" Margin="15,0,15,0" Grid.Row="4"/>
+        </Grid>
     </ScrollView>
 </ContentPage>
