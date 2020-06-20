@@ -14,6 +14,7 @@ namespace MealPlannerMobile
         {
             DotNetEnv.Env.Load(); // Need to fix this later to use .env files
 
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(Repository.SyncfusionKey); //DotNetEnv.Env.GetString("SYNCFUSION_APIKEY"));
             
             InitializeComponent();
 
