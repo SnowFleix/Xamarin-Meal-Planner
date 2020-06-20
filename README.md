@@ -8,7 +8,9 @@ To learn and explore the features of Xamarin and understand what requirements be
 ### Prerequisites
 
 Some knowledge of C#, .NET Framework and Xamarin.
+
 Once opening the solution if you haven't got a Rapid API key for spoonacular or a spoonacular API key go request one, they're free. To fully use the UI elements of the app you will also need a SyncfusionLicense from https://www.syncfusion.com/xamarin-ui-controls you can get a 30 day free trial. 
+
 You need to add your own API keys in the Repository class under Assets->Data->Repository.cs
 
 ### Installing
