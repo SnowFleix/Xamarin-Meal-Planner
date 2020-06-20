@@ -192,33 +192,22 @@ namespace Extensions
                 return false;
             }
         }
+        /// <summary>
+        /// Tries to cast an object to a recipe, if not it will return false
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool IsObjRecipe(object obj)
+        {
+            try
+            {
+                string title = ((Recipe)obj).title;
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
-
-    //public class RelayCommand : ICommand
-    //{
-    //    private readonly Predicate<object> _canExecute;
-    //    private readonly Action<object> _execute;
-
-    //    public RelayCommand(Predicate<object> canExecute, Action<object> execute)
-    //    {
-    //        _canExecute = canExecute;
-    //        _execute = execute;
-    //    }
-
-    //    public event EventHandler CanExecuteChanged
-    //    {
-    //        add => System.Windows.Input.CommandManager.RequerySuggested += value;
-    //        remove => System.Windows.Input.CommandManager.RequerySuggested -= value;
-    //    }
-
-    //    public bool CanExecute(object parameter)
-    //    {
-    //        return _canExecute(parameter);
-    //    }
-
-    //    public void Execute(object parameter)
-    //    {
-    //        _execute(parameter);
-    //    }
-    //}
 }

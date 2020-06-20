@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,49 +14,33 @@ namespace MealPlannerMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewWeeksRecipes : ContentPage
     {
-        // BindableProperty implementation
-        public static readonly BindableProperty CommandProperty =
-            BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(ViewWeeksRecipes), null);
-
-        public ICommand Command
+        public struct ViewRecipesModel
         {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
-        }
-
-        // Helper method for invoking commands safely
-        public static void Execute(ICommand command)
-        {
-            if (command == null) return;
-            if (command.CanExecute(null))
-            {
-                command.Execute(null);
-            }
+            public ICommand CardTappedCommand { get; set; }
+            public Recipe[] recipes { get; set; }
         }
 
         public ViewWeeksRecipes()
         {
             InitializeComponent();
+            ViewRecipesModel context = new ViewRecipesModel();
+            context.CardTappedCommand = new Command<object>(OnCardTapped);
+            context.recipes = Repository.result.results; // TODO: Change to use persistent data
 
-            this.BindingContext = Repository.result; // TODO: Change to use persistent data
+            this.BindingContext = context; 
         }
-
-        // this is the command that gets bound by the control in the view
-        // (ie. a Button, TapRecognizer, or MR.Gestures)
-        public Command OnTap => new Command(() => { 
-            Execute(Command); 
-            Console.WriteLine("Got to the executing part"); 
-        } );
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public async void OnCardTapped(object sender, EventArgs e)
+        /// <remarks>Not fully implemented, need to figure out how to send the tapped recipe as a parameter</remarks>
+        public async void OnCardTapped(object sender)
         {
+            if (!UtilFunction.IsObjRecipe(sender)) return;
             // TODO: Find out how to get the data from the tapped card
-            await Navigation.PushModalAsync(new ViewRecipe(  new Recipe()  ));
+            await Navigation.PushModalAsync(new ViewRecipe((Recipe)sender));
         }
     }
 }

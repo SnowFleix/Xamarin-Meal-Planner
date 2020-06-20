@@ -29,10 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Data\.env" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Assets\TestData\Repository.cs" />
     <Resource Include="Assets\TestData\TestingData.JSON" />
   </ItemGroup>

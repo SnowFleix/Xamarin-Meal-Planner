@@ -6,6 +6,10 @@ namespace MealPlannerMobile
 {
     public partial class App : Application
     {
+        private const string DietKey = "Diet";
+        private const string MaxCaloriesKey = "MaxCalories";
+        private const string IntolerancesKey = "Intolerances";
+        private const string ExcludedIngredientsKey = "ExcludedIngredients";
         public App()
         {
             DotNetEnv.Env.Load(); // Need to fix this later to use .env files

@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              x:Class="MealPlannerMobile.ViewWeeksRecipes">
     <ContentPage.Content>
-        <cards:SfCardLayout BindableLayout.ItemsSource="{Binding results}" SwipeDirection="Right" > CardTappedCommand="{Binding OnTap}"
+        <cards:SfCardLayout BindableLayout.ItemsSource="{Binding recipes}" SwipeDirection="Right" CardTappedCommand="{Binding CardTappedCommand}" CardTappedCommandParameter="{Binding recipes}"> <!--Need to update this to pass the correct variable-->
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <cards:SfCardView VerticalOptions="Center" HeightRequest="425" BackgroundColor="#4AC948">
