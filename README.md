@@ -11,7 +11,7 @@ Some knowledge of C#, .NET Framework and Xamarin.
 
 Once opening the solution if you haven't got a Rapid API key for spoonacular or a spoonacular API key go request one, they're free. To fully use the UI elements of the app you will also need a SyncfusionLicense from https://www.syncfusion.com/xamarin-ui-controls you can get a 30 day free trial. 
 
-You need to add your own API keys in the Repository class under Assets->Data->Repository.cs
+You need to add your own API keys in the Repository class under Assets->Data->Repository.cs If you choose to use the spoonacular API key rather than the rapidAPI like I did you will have to change some of the code in the SpoonacularAPI class to allow the app to request from there rather than RapidAPI
 
 ### Installing
 
