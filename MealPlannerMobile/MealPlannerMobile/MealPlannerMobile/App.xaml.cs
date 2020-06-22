@@ -1,25 +1,23 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace MealPlannerMobile
 {
     public partial class App : Application
     {
-        private const string DietKey = "Diet";
-        private const string MaxCaloriesKey = "MaxCalories";
-        private const string IntolerancesKey = "Intolerances";
-        private const string ExcludedIngredientsKey = "ExcludedIngredients";
         public App()
         {
-            DotNetEnv.Env.Load(); // Need to fix this later to use .env files
+            DotNetEnv.Env.Load("./Assets/Data/.env"); // Need to fix this later to use .env files
 
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(Repository.SyncfusionKey); //DotNetEnv.Env.GetString("SYNCFUSION_APIKEY"));
             
             InitializeComponent();
 
-            //Result apiResult = new spoontacularAPI().GetRandomRecipe("", "", "", "main course", 28);
-            //Result apiResult = new Repository().result;
             MainPage = new HomeTabbedPage();
         }
 
@@ -32,6 +30,6 @@ namespace MealPlannerMobile
         protected override void OnResume()
         { }
 
-        
+
     }
 }

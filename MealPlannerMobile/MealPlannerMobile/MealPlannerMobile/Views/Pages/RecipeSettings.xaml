@@ -26,24 +26,23 @@
             <!--TODO: change to allow binding with the persistant data-->
             <!--Diet row-->
             <Label Grid.Row="0" Grid.Column="0" 
-                   FontSize="40"
+                   FontSize="35"
                    TextColor="Black"
                    FontFamily="Heebo"
                    Text="Diet:"/>
             <Picker Grid.Row="0" Grid.Column="1"
-                    x:Name="picker_diets"
-                    Title="Select a diet"
+                    ItemsSource="{Binding APIDiets}"
                     TitleColor="Black" />
             <!--Intolerances list and buttons-->
             <Label Grid.Row="1" Grid.ColumnSpan="2" 
                    Text="Intolerances:"/>
-            <ListView Grid.Row="2" Grid.ColumnSpan="2" x:Name="lstView_intolerances" ItemTapped="lstView_intolerances_OnItemTapped" />
-            <Picker Grid.Row="3" Grid.Column="0" x:Name="picker_intolerances" />
+            <ListView Grid.Row="2" Grid.ColumnSpan="2" x:Name="LstView_Intolerances" ItemTapped="lstView_intolerances_OnItemTapped" />
+            <Picker ItemsSource="{Binding Intolerances}" Grid.Row="3" Grid.Column="0" x:Name="picker_intolerances" />
             <Button Grid.Row="3" Grid.Column="1" Text="Add" Clicked="btnAddIntolerance_click" />
             <!--Max calories row-->
             <Label Grid.Row="4" Grid.Column="0" 
                    Text="Max Calories:" />
-            <Entry Grid.Row="4" Grid.Column="1" Text="0000" />
+            <Entry Grid.Row="4" Grid.Column="1" x:Name="CalorieEntry" />
             <!--Exclue ingredients area-->
             <Label Grid.Row="5" Grid.Column="0" 
                    Text="Exclude Ingredients" />
