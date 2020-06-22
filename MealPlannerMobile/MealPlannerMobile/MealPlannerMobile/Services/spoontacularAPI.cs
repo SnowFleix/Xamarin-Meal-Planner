@@ -132,5 +132,30 @@ namespace MealPlannerMobile
 
             return JsonConvert.DeserializeObject<ConversionResponse>(response.Content).targetAmount;
         }
+
+        /// <summary>
+        /// Returns a recipe from the spoonacular API with the passed ID
+        /// </summary>
+        /// <param name="ingredientID"></param>
+        /// <param name="includeNutrition"></param>
+        /// <returns></returns>
+        public Recipe GetRecipeFromID(int ingredientID, bool includeNutrition = true)
+        {
+            var path = String.Format("/recipes/{0}",
+                                     ingredientID);
+            if (includeNutrition)
+                path += "/information";
+            path = path.Replace("{format}", "json");
+
+            // make the HTTP request
+            IRestResponse response = (IRestResponse)SendRequest(path, Method.GET, new Dictionary<String, String>()); // just create an empty query param dictionary because we already built the query params
+
+            if (((int)response.StatusCode) >= 400)
+                throw new Exception((int)response.StatusCode + "Error calling GetRandomRecipes: " + response.Content + response.Content);
+            else if (((int)response.StatusCode) == 0)
+                throw new Exception((int)response.StatusCode + "Error calling GetRandomRecipes: " + response.ErrorMessage + response.ErrorMessage);
+
+            return JsonConvert.DeserializeObject<Recipe>(response.Content);
+        }
     }
 }

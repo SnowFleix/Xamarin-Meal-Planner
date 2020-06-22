@@ -209,5 +209,26 @@ namespace Extensions
                 return false;
             }
         }
+        /// <summary>
+        /// Returns a recipe using the ID
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public static Recipe GetRecipeFromID(int ID)
+        {
+            return new spoontacularAPI().GetRecipeFromID(ID);
+        }
+        /// <summary>
+        /// Returns an array of recipes from a list of RecipeIDs
+        /// </summary>
+        /// <param name="RecipeID"></param>
+        /// <returns></returns>
+        public static Recipe[] GetRecipesFromID(List<int> RecipeID)
+        {
+            List<Recipe> retLst = new List<Recipe>();
+            foreach (int i in RecipeID)
+                retLst.Add(new spoontacularAPI().GetRecipeFromID(i));
+            return retLst.ToArray();
+        }
     }
 }
