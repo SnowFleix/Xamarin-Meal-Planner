@@ -10,7 +10,9 @@ using MealPlannerMobile.iOS;
 using SQLite;
 using UIKit;
 
-//[assembly: Dependency(typeof(SQLiteDB))]
+using Xamarin.Forms;
+
+[assembly: Xamarin.Forms.Dependency(typeof(SQLiteDB))]
 namespace MealPlannerMobile.iOS
 {
     class SQLiteDB : ISQLiteDB
@@ -18,7 +20,7 @@ namespace MealPlannerMobile.iOS
         public SQLiteAsyncConnection GetConnection()
         {
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var path = Path.Combine(documentsPath, "UserData.db3");
+            var path = Path.Combine(documentsPath, "MySQLite.db3");
 
             return new SQLiteAsyncConnection(path);
         }

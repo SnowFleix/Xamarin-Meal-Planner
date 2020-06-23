@@ -12,8 +12,10 @@ using Android.Views;
 using Android.Widget;
 
 using SQLite;
+using Xamarin.Forms;
+using MealPlannerMobile.Droid;
 
-//[assembly: Dependency(typeof(SQLiteDB))]
+[assembly: Dependency(typeof(SQLiteDB))]
 namespace MealPlannerMobile.Droid
 {
     class SQLiteDB : ISQLiteDB
@@ -21,7 +23,7 @@ namespace MealPlannerMobile.Droid
         public SQLiteAsyncConnection GetConnection()
         {
             var documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
-            var path = Path.Combine(documentsPath, "UserData.db3");
+            var path = Path.Combine(documentsPath, "MySQLite.db3");
 
             return new SQLiteAsyncConnection(path);
         }

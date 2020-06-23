@@ -9,11 +9,15 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using SQLite;
+
 namespace MealPlannerMobile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewWeeksRecipes : ContentPage
     {
+        private SQLiteAsyncConnection _connection;
+        ViewRecipesModel context = new ViewRecipesModel();
         public struct ViewRecipesModel
         {
             public ICommand CardTappedCommand { get; set; }
@@ -23,15 +27,27 @@ namespace MealPlannerMobile
         public ViewWeeksRecipes()
         {
             InitializeComponent();
-            ViewRecipesModel context = new ViewRecipesModel();
             context.CardTappedCommand = new Command<object>(OnCardTapped);
+            _connection = DependencyService.Get<ISQLiteDB>().GetConnection();
             context.recipes = Repository.result.results; // TODO: Change to use persistent data
+        }
 
-            this.BindingContext = context; 
+        protected override async void OnAppearing()
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
+            //await _connection.CreateTableAsync<RecipeData>();
+
+            var recipes = await _connection.Table<Recipe>().ToListAsync();
+
+            watch.Stop();
+
+            context.recipes = recipes.ToArray();
+            this.BindingContext = context;
         }
 
         /// <summary>
-        /// 
+        /// Handles the tapping of the card
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

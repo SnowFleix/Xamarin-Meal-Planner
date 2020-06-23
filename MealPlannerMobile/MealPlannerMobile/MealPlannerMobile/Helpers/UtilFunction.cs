@@ -61,6 +61,27 @@ namespace Extensions
                 return string.Format("Ready in {0} minutes", mins);
             return string.Format("Ready in {0} hours and {1} minutes", hours, mins);
         }
+        /// <summary>
+        /// Converts a Recipe to a RecipeData class ready to insert into the database
+        /// </summary>
+        /// <param name="recipe"></param>
+        /// <returns></returns>
+        public static RecipeData ToRecipeData(Recipe recipe)
+        {
+            return new RecipeData { SpoonacularRecipeID = (int)recipe.id };
+        }
+        /// <summary>
+        /// Gets all the recipe ids from the recipe table
+        /// </summary>
+        /// <param name="recipes"></param>
+        /// <returns></returns>
+        public static List<int> GetIdsFromRecipeData(RecipeData[] recipes)
+        {
+            List<int> retLst = new List<int>();
+            foreach (RecipeData r in recipes)
+                retLst.Add(r.SpoonacularRecipeID);
+            return retLst;
+        }
     }
 
     public static class UtilFunction
