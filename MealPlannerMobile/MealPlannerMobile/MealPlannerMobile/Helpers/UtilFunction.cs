@@ -66,22 +66,13 @@ namespace Extensions
         /// </summary>
         /// <param name="recipe"></param>
         /// <returns></returns>
-        public static RecipeData ToRecipeData(Recipe recipe)
-        {
-            return new RecipeData { SpoonacularRecipeID = (int)recipe.id };
-        }
+        public static RecipeData ToRecipeData(Recipe recipe) { return new RecipeData { SpoonacularRecipeID = (int)recipe.id }; }
         /// <summary>
         /// Gets all the recipe ids from the recipe table
         /// </summary>
         /// <param name="recipes"></param>
         /// <returns></returns>
-        public static List<int> GetIdsFromRecipeData(RecipeData[] recipes)
-        {
-            List<int> retLst = new List<int>();
-            foreach (RecipeData r in recipes)
-                retLst.Add(r.SpoonacularRecipeID);
-            return retLst;
-        }
+        public static List<int> GetIdsFromRecipeData(RecipeData[] recipes) { return recipes.Select(x => x.SpoonacularRecipeID).ToList(); }
     }
 
     public static class UtilFunction
@@ -244,12 +235,11 @@ namespace Extensions
         /// </summary>
         /// <param name="RecipeID"></param>
         /// <returns></returns>
-        public static Recipe[] GetRecipesFromID(List<int> RecipeID)
-        {
-            List<Recipe> retLst = new List<Recipe>();
-            foreach (int i in RecipeID)
-                retLst.Add(new spoontacularAPI().GetRecipeFromID(i));
-            return retLst.ToArray();
-        }
+        public static Recipe[] GetRecipesFromID(List<int> RecipeID) { return RecipeID.Select(x => GetRecipeFromID(x)).ToArray(); }
+        //List<Recipe> retLst = new List<Recipe>();
+            //foreach (int i in RecipeID)
+            //    retLst.Add(new spoontacularAPI().GetRecipeFromID(i));
+            //return retLst.ToArray();
+        
     }
 }

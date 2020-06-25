@@ -31,23 +31,9 @@ namespace MealPlannerMobile
 
         protected override async void OnStart()
         {
-            await _connection.CreateTableAsync<Recipe>();
-            await _connection.DropTableAsync<RecipeData>();
-
-            // justs adds a bunch of random data to the table to show it as an example
-            if ((await _connection.Table<Recipe>().ToListAsync()).Count == 0)
-            {
-                await _connection.InsertAsync(Repository.result.results[0]);
-                await _connection.InsertAsync(Repository.result.results[0]);
-                await _connection.InsertAsync(Repository.result.results[0]);
-                await _connection.InsertAsync(Repository.result.results[0]);
-                await _connection.InsertAsync(Repository.result.results[0]);
-                await _connection.InsertAsync(Repository.result.results[0]);
-                await _connection.InsertAsync(Repository.result.results[0]);
-                await _connection.InsertAsync(Repository.result.results[0]);
-                await _connection.InsertAsync(Repository.result.results[0]);
-                await _connection.InsertAsync(Repository.result.results[0]);
-            }
+            #region Adds some test data to the SQLite DB to minimise API calls
+            await new SQLiteDBConnection().AddTestData();
+            #endregion
         }
 
         protected override void OnSleep()

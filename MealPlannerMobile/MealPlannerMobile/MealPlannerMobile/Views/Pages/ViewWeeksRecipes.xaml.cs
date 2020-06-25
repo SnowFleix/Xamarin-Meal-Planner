@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using SQLite;
+using Syncfusion.XForms.Cards;
 
 namespace MealPlannerMobile
 {
@@ -34,16 +35,15 @@ namespace MealPlannerMobile
 
         protected override async void OnAppearing()
         {
+            /* Removed for testing
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            //await _connection.CreateTableAsync<RecipeData>();
-
-            var recipes = await _connection.Table<Recipe>().ToListAsync();
+            var recipes = await _connection.Table<RecipeData>().ToListAsync();
 
             watch.Stop();
 
-            context.recipes = recipes.ToArray();
-            this.BindingContext = context;
+            context.recipes = UtilFunction.GetRecipesFromID(Convertion.GetIdsFromRecipeData(recipes.ToArray()));
+            this.BindingContext = context;*/
         }
 
         /// <summary>
@@ -54,9 +54,13 @@ namespace MealPlannerMobile
         /// <remarks>Not fully implemented, need to figure out how to send the tapped recipe as a parameter</remarks>
         public async void OnCardTapped(object sender)
         {
-            if (!UtilFunction.IsObjRecipe(sender)) return;
-            // TODO: Find out how to get the data from the tapped card
-            await Navigation.PushModalAsync(new ViewRecipe((Recipe)sender));
+            // If the sender is somehow null return instantly and do nothing
+            if (sender == null) return;
+            // 
+            SfCardView cardView = (sender as TappedEventArgs).Parameter as SfCardView;
+            var recipe = cardView.BindingContext as Recipe;
+            if (!UtilFunction.IsObjRecipe(recipe)) return;
+            await Navigation.PushModalAsync(new ViewRecipe(recipe));
         }
     }
 }

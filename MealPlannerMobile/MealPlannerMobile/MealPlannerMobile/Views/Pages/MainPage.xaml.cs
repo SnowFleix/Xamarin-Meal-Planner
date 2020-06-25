@@ -16,7 +16,7 @@ namespace MealPlannerMobile
         public MainPage()
         {
             InitializeComponent();
-            this.BindingContext = Repository.result;
+            this.BindingContext = Repository.result; // change to use persistant data but only for todays recipes
         }
 
         public async void ViewRecipes_Clicked(object sender, EventArgs e)
