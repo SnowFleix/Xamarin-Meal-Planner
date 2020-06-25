@@ -7,6 +7,7 @@ namespace MealPlannerMobile.Models
     class HomePageModel
     {
         public string RecipeImage { get; set; }
+        public double RecipeProgress { get; set; }
 
         /// <summary>
         /// Default constructor

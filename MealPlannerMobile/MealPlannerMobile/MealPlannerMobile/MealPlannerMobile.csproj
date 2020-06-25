@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <None Remove="Assets\Data\.env" />
+    <None Remove="Assets\Images\XamarinLogo.png" />
     <None Remove="Assets\TestData\TestingData.JSON" />
   </ItemGroup>
 
@@ -32,6 +33,7 @@
     <EmbeddedResource Include="Assets\Data\.env">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Images\XamarinLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,7 +57,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\Images\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 

@@ -27,7 +27,7 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </cards:SfCardLayout>
-            <ProgressBar x:Name="RecipeProgress" Grid.Row="2" Margin="15,0,15,0" />
+            <ProgressBar Progress="{Binding RecipeProgress}" Grid.Row="2" Margin="15,0,15,0" />
             <Button Text="View Recipes" Clicked="ViewRecipes_Clicked" Padding="0,20,0,20" Margin="15,0,15,0" Grid.Row="3"/>
             <Button Text="View Shopping List" Clicked="ViewShoppingList_Clicked" Padding="0,20,0,20" Margin="15,0,15,0" Grid.Row="4"/>
         </Grid>
