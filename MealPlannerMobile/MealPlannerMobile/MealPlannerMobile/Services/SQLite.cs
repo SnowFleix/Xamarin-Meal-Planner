@@ -35,7 +35,6 @@ namespace MealPlannerMobile
         {
             _connection = DependencyService.Get<ISQLiteDB>().GetConnection();
         }
-
         /// <summary>
         /// Gets all the recipes the user has saved in their database
         /// </summary>
@@ -46,9 +45,37 @@ namespace MealPlannerMobile
 
             return UtilFunction.GetRecipesFromID(Convertion.GetIdsFromRecipeData(recipes.ToArray()));
         }
-
-
-
+        /// <summary>
+        /// Inserts a recipe into the database
+        /// </summary>
+        /// <param name="recipe"></param>
+        /// <returns></returns>
+        public async Task<bool> InsertRecipe(Recipe recipe)
+        {
+            await _connection.InsertAsync(Convertion.ToRecipeData(recipe));
+            return true;
+        }
+        /// <summary>
+        /// Deletes the passed recipe from the table
+        /// </summary>
+        /// <param name="recipe"></param>
+        /// <returns></returns>
+        /// <remarks>Needs to be changed so that it actually deletes the right recipe</remarks>
+        public async Task<bool> DeleteRecipe(Recipe recipe) 
+        {
+            await _connection.DeleteAsync<RecipeData>(recipe.id);
+            return true;
+        }
+        /// <summary>
+        /// Drops the entire RecipeData table from the database 
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>It won't let me use a generic method to delete table of type T</remarks>
+        public async Task<bool> DropRecipeTable() // it won't let me use a generic method so
+        {
+            await _connection.DropTableAsync<RecipeData>();
+            return true;
+        }
         #region Test Code
         /// <summary>
         /// Simple function to add 

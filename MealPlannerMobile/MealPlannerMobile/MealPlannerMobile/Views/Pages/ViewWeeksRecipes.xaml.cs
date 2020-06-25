@@ -17,7 +17,6 @@ namespace MealPlannerMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewWeeksRecipes : ContentPage
     {
-        private SQLiteAsyncConnection _connection;
         ViewRecipesModel context = new ViewRecipesModel();
         public struct ViewRecipesModel
         {
@@ -29,21 +28,14 @@ namespace MealPlannerMobile
         {
             InitializeComponent();
             context.CardTappedCommand = new Command<object>(OnCardTapped);
-            _connection = DependencyService.Get<ISQLiteDB>().GetConnection();
-            context.recipes = Repository.result.results; // TODO: Change to use persistent data
         }
 
-        protected override async void OnAppearing()
+        /// <summary>
+        /// When the page appears load all the data for the cards
+        /// </summary>
+        protected override void OnAppearing()
         {
-            /* Removed for testing
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-
-            var recipes = await _connection.Table<RecipeData>().ToListAsync();
-
-            watch.Stop();
-
-            context.recipes = UtilFunction.GetRecipesFromID(Convertion.GetIdsFromRecipeData(recipes.ToArray()));
-            this.BindingContext = context;*/
+            this.BindingContext = new SQLiteDBConnection().GetRecipes();
         }
 
         /// <summary>
@@ -56,7 +48,7 @@ namespace MealPlannerMobile
         {
             // If the sender is somehow null return instantly and do nothing
             if (sender == null) return;
-            // 
+            // I dob't like this but it's how they said to use the tapped event
             SfCardView cardView = (sender as TappedEventArgs).Parameter as SfCardView;
             var recipe = cardView.BindingContext as Recipe;
             if (!UtilFunction.IsObjRecipe(recipe)) return;
