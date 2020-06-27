@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Extensions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -88,6 +89,15 @@ namespace MealPlannerMobile
             {
                 Properties[ExcludedIngredientsKey] = value;
             }
+        }
+
+        /// <summary>
+        /// Gets all the ingredients to exclude from a recipe
+        /// </summary>
+        /// <returns></returns>
+        public string GetIngredientsToExclude()
+        {
+            return Convertion.ToString(Intolerances) + ", " + Convertion.ToString(ExcludedIngredients);
         }
     }
 }

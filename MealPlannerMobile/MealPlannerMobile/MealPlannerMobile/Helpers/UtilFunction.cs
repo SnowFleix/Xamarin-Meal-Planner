@@ -28,6 +28,12 @@ namespace Extensions
         /// <returns></returns>
         public static string ToString(object obj) { return Convert.ToString(obj); }
         /// <summary>
+        /// Converts a list of string
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string ToString(List<string> obj) { string retS = ""; foreach(string str in obj) retS += str + ", "; return retS.Truncate(retS.Length - 2); }
+        /// <summary>
         /// Converts an object to a double
         /// </summary>
         /// <param name="obj"></param>
@@ -73,6 +79,17 @@ namespace Extensions
         /// <param name="recipes"></param>
         /// <returns></returns>
         public static List<int> GetIdsFromRecipeData(RecipeData[] recipes) { return recipes.Select(x => x.SpoonacularRecipeID).ToList(); }
+        /// <summary>
+        /// Uses substring to truncate a string to the passed length
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="maxLength"></param>
+        /// <returns></returns>
+        public static string Truncate(this string value, int maxLength)
+        {
+            if (string.IsNullOrEmpty(value)) return value;
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+        }
     }
 
     public static class UtilFunction
@@ -236,6 +253,20 @@ namespace Extensions
         /// <param name="RecipeID"></param>
         /// <returns></returns>
         public static Recipe[] GetRecipesFromID(List<int> RecipeID) { return RecipeID.Select(x => GetRecipeFromID(x)).ToArray(); }
+        /// <summary>
+        /// Merges any two arrays together of the same type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array1"></param>
+        /// <param name="array2"></param>
+        /// <returns></returns>
+        public static T[] MergeTwoArrays<T>(T[] array1, T[] array2)
+        {
+            int array1OriginalLength = array1.Length;
+            Array.Resize<T>(ref array1, array1OriginalLength + array2.Length);
+            Array.Copy(array2, 0, array1, array1OriginalLength, array2.Length);
+            return array1;
+        }
         //List<Recipe> retLst = new List<Recipe>();
             //foreach (int i in RecipeID)
             //    retLst.Add(new spoontacularAPI().GetRecipeFromID(i));

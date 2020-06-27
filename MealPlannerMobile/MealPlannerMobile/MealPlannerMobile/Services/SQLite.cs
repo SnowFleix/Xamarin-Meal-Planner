@@ -56,6 +56,16 @@ namespace MealPlannerMobile
             return true;
         }
         /// <summary>
+        /// Inserts an array of recipes
+        /// </summary>
+        /// <param name="recipes"></param>
+        /// <returns></returns>
+        public async Task<bool> InsertRecipeSet(Recipe[] recipes)
+        {
+            await _connection.InsertAllAsync(recipes);
+            return true;
+        }
+        /// <summary>
         /// Deletes the passed recipe from the table
         /// </summary>
         /// <param name="recipe"></param>
